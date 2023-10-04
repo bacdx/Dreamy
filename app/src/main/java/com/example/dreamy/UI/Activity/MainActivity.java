@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Fragment.CategoryFragment;
 import com.example.dreamy.UI.Activity.Fragment.ChatboxFragment;
 import com.example.dreamy.UI.Activity.Fragment.FavoriesFragment;
 import com.example.dreamy.UI.Activity.Fragment.HomeFragment;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             if(id==R.id.home){
                 replaceFragment(new HomeFragment());
             } else if (id==R.id.product) {
-                replaceFragment(new ProductFragment());
+                replaceFragment(new CategoryFragment());
             }
             else if (id==R.id.favorites) {
                 replaceFragment(new FavoriesFragment());
