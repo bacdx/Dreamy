@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:iconTint="#F77797"
+        android:icon="@drawable/icon_home"/>
+    <item android:id="@+id/product"
+        android:title="Product"
+        android:iconTint="#F77797"
+        android:icon="@drawable/icon_product"/>
+    <item android:id="@+id/favorites"
+        android:title="Favorites"
+        android:iconTint="#F77797"
+        android:icon="@drawable/icon_heart"/>
+    <item android:id="@+id/chatbox"
+        android:title="Chat"
+        android:iconTint="#F77797"
+        android:icon="@drawable/icon_chat"/>
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        android:iconTint="#F77797"
+        android:icon="@drawable/icon_profile"/>
+</menu>
+
+
