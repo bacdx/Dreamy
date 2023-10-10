@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.Activity.Fragment.CategoryFragment">
     <TextView
+        android:id="@+id/text1"
         android:background="#ECD894"
         android:gravity="center"
         android:text="Points earned on every day order to redeem free gifts !"
