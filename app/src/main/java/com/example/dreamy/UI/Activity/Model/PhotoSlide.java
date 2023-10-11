@@ -1,6 +1,8 @@
 package com.example.dreamy.UI.Activity.Model;
 
-public class PhotoSlide {
+import java.io.Serializable;
+
+public class PhotoSlide implements Serializable {
     private int resourceId;
 
     public PhotoSlide(int resourceId) {
