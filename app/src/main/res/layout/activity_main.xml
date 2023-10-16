@@ -33,10 +33,11 @@
             android:height="40dp"
             android:background="@drawable/home_gradiant"
             android:drawableStart="@drawable/baseline_search_24"
-            android:hint="Search "
+            android:hint="Tìm kiếm sản phẩm"
             android:padding="8dp" />
 
         <ImageView
+            android:id="@+id/img_cart"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"

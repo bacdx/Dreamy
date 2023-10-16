@@ -3,6 +3,7 @@ package com.example.dreamy.UI.Activity.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -87,6 +89,7 @@ public class ProductFragment extends Fragment {
         list.add(new Product("4","Áo Khoét Vai Bo Len Tăm Siêu Xinhp","mda1","Ao Nu","12/03/2022","4","Khong co gi","172.000","https://down-vn.img.susercontent.com/file/sg-11134201-22100-d383yjn0m5iv1a"));
         return list;
     }
+    ImageView imgback;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,9 +99,16 @@ public class ProductFragment extends Fragment {
         spin_size = view.findViewById(R.id.spinSize);
         textView = view.findViewById(R.id.tv_name_category);
         recyclerView = view.findViewById(R.id.rcv_product);
+        imgback= view.findViewById(R.id.img_back);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+
+            }
+        });
         if(getArguments()!=null){
             String name = getArguments().getString("name");
-
             textView.setText(name);
         }
         // adapter spinner 1
