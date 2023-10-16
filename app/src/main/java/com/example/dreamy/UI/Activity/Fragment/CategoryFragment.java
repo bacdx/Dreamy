@@ -1,14 +1,33 @@
 package com.example.dreamy.UI.Activity.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Adapter.CategoryAdapter;
+import com.example.dreamy.UI.Activity.Interface.CategoryInterface;
+import com.example.dreamy.UI.Activity.Interface.RetrofitService;
+import com.example.dreamy.UI.Activity.Model.Category;
+import com.example.dreamy.UI.Activity.Model.PhotoSlide;
+import com.example.dreamy.UI.Activity.ProductActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +44,10 @@ public class CategoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private CategoryAdapter adapter;
+    private RecyclerView recyclerView;
+    View view ;
+    List<Category> list ;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -61,6 +84,62 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+         view =inflater.inflate(R.layout.fragment_category, container, false);
+        recyclerView = view.findViewById(R.id.rcv_category);
+        list = new ArrayList<Category>();
+
+        list = getListCung();
+        adapter = new CategoryAdapter(getContext(), list, new CategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Category category) {
+                Intent intent = new Intent(getActivity(), ProductActivity.class);
+                intent.putExtra("Category",category);
+                startActivity(intent);
+            }
+        });
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
+        return view;
+    }
+    private List<Category> getListCung() {
+        List<Category> list = new ArrayList<>();
+        list.add(new Category("1","Ao Nu","https://taoanhdep.com/wp-content/uploads/2022/08/65d0d901c19d92bded2e1a0defa3b95e_original-350x265.jpeg","kkk"));
+        list.add(new Category("2","Quan Nu","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0A94uzQPEKw42s3TrWP8vkmrHPpJAoaOzA&usqp=CAU","kkk"));
+        list.add(new Category("3","Vay Nu","https://pos.nvncdn.net/792dd7-10067/ps/20230524_0jiamAyCsD.jpeg","kkk"));
+        list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
+        return list;
+    }
+    static final  String BASE_URL="http://192.168.0.104:3000/.../";
+    private void getList(){
+        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        CategoryInterface categoryInterface = retrofit.create(CategoryInterface.class);
+        Call<List<Category>> call = categoryInterface.getList();
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if(response.isSuccessful()){
+                    list.clear();
+                    list.addAll(response.body());
+                    Log.d("zzzzzzzz", "onResponse: "+list);
+                    Log.d("zzzzzzzzzzzz", "onResponse: "+ response.body());
+                    adapter = new CategoryAdapter(getContext(), list, new CategoryAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Category category) {
+                                //String
+                            Intent intent = new Intent(getActivity(), ProductActivity.class);
+                        }
+                    });
+                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+            }
+        });
     }
 }
