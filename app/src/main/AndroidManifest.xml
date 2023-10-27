@@ -21,10 +21,7 @@
         </activity>
         <activity
             android:name=".UI.Activity.ProductDetailsActivity"
-//sua
-            android:name=".UI.Activity.ProductActivity"
-
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".UI.Activity.MainActivity"
             android:exported="true">
