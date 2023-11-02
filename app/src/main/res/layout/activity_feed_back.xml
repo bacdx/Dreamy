@@ -11,6 +11,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
@@ -37,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
             android:fontFamily="@font/font2"
-            android:onClick="onSendClick"
             android:text="Gửi"
             android:textColor="#ED1C24"
             android:textSize="16sp"
@@ -125,14 +125,14 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ratingLabel"
-                    app:layout_constraintStart_toEndOf="@+id/tv_ratingsp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -165,7 +165,6 @@
                     android:background="@drawable/red_border"
                     android:drawableLeft="@drawable/camera"
                     android:drawablePadding="10dp"
-                    android:onClick="onCameraClick"
                     android:paddingStart="10dp"
                     android:text="Thêm hình ảnh"
                     android:textColor="#ED1C24" />
@@ -179,7 +178,6 @@
                     android:background="@drawable/red_border"
                     android:drawableLeft="@drawable/video"
                     android:drawablePadding="10dp"
-                    android:onClick="onVideoClick"
                     android:paddingStart="10dp"
                     android:text="Thêm video"
                     android:textColor="#ED1C24" />
@@ -315,33 +313,36 @@
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
-            <LinearLayout
+            <RadioGroup
                 android:id="@+id/size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:orientation="horizontal">
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radio_chuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:buttonTint="@color/white"
                     android:text="Chuẩn" />
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radio_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="34dp"
+                    android:buttonTint="@color/black"
                     android:text="Chật" />
 
-                <RadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radio_rong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
                     android:text="Rộng" />
-            </LinearLayout>
+            </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -364,11 +365,11 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar_nguoiban"
-                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -409,11 +410,11 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar_ship"
-                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="1"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
