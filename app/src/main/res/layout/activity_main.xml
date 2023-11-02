@@ -24,19 +24,33 @@
             android:layout_weight="1"
             android:src="@drawable/logo" />
 
-        <EditText
-            android:id="@+id/ed_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="5"
-            android:height="40dp"
-            android:background="@drawable/home_gradiant"
-            android:drawableStart="@drawable/baseline_search_24"
-            android:hint="Search "
-            android:padding="8dp" />
-
+       <LinearLayout
+           android:layout_gravity="center"
+           android:padding="5dp"
+           android:background="@drawable/home_gradiant"
+           android:orientation="horizontal"
+           android:layout_width="0dp"
+           android:layout_weight="4"
+           android:layout_height="50dp">
+           <EditText
+               android:background="@android:color/transparent"
+               android:id="@+id/ed_search"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_weight="5"
+               android:height="40dp"
+               android:hint="Tìm kiếm sản phẩm"
+               android:padding="8dp" />
+           <ImageView
+               android:id="@+id/img_search"
+               android:layout_width="0dp"
+               android:layout_height="40dp"
+               android:layout_weight="1"
+               android:src="@drawable/baseline_search_24" />
+       </LinearLayout>
         <ImageView
+            android:id="@+id/img_cart"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"

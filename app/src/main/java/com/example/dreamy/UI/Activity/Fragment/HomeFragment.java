@@ -3,17 +3,26 @@ package com.example.dreamy.UI.Activity.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Adapter.ProductAdapter;
 import com.example.dreamy.UI.Activity.Adapter.SlideHomeAdapter;
+import com.example.dreamy.UI.Activity.Interface.ProductsInterface;
+import com.example.dreamy.UI.Activity.Interface.RetrofitService;
 import com.example.dreamy.UI.Activity.Model.PhotoSlide;
+import com.example.dreamy.UI.Activity.Model.Product;
+import com.example.dreamy.UI.Activity.ProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +30,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,13 +86,16 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    RecyclerView rcv_home ;
+    List<Product> list;
+    ProductAdapter productAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_home, container, false);
         vpr = (ViewPager) view.findViewById(R.id.vpr);
+        rcv_home = view.findViewById(R.id.rcv_random);
         circleIndicator = (CircleIndicator) view.findViewById(R.id.circle_indicator);
         photoList = getListPhoto();
         slideHomeAdapter = new SlideHomeAdapter(getContext(), photoList);
@@ -87,6 +103,8 @@ public class HomeFragment extends Fragment {
         circleIndicator.setViewPager(vpr);
         slideHomeAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlide();
+        list= new ArrayList<Product>();
+        listRandom();
         return  view ;
     }
     private List<PhotoSlide> getListPhoto() {
@@ -122,5 +140,37 @@ public class HomeFragment extends Fragment {
                 });
             }
         }, 3000, 4000);
+    }
+    static final  String BASE_URL="http://192.168.0.102:3000/api/";
+    private void listRandom(){
+        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);
+        Call<List<Product>> call = iProductsInterface.getListHome();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    list.clear();
+                    list.addAll(response.body());
+                    Log.d("listsp", "onResponse: "+list);
+                    Log.d("listspbody", "onResponse: "+ response.body());
+                    productAdapter = new ProductAdapter(getContext(), list, new ProductAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Product product) {
+
+                        }
+                    });
+                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+                    rcv_home.setLayoutManager(gridLayoutManager);
+                    rcv_home.setAdapter(productAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.e("RetrofitError", "onFailure: ", t);
+                Toast.makeText(getContext(), "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

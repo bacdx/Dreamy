@@ -48,5 +48,9 @@ public class HistoryActivity extends AppCompatActivity {
             }
         }).attach();
 
+        findViewById(R.id.btnBack).setOnClickListener(view -> {
+            finish();
+        });
+
     }
 }

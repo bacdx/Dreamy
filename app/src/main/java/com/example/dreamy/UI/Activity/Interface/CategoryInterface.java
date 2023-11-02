@@ -8,6 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface CategoryInterface {
-    @GET("list")
+    @GET("loaisanphams")
     Call<List<Category>> getList();
 }
