@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.Adapter.CategoryAdapter;
@@ -88,18 +89,7 @@ public class CategoryFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcv_category);
         list = new ArrayList<Category>();
 
-        list = getListCung();
-        adapter = new CategoryAdapter(getContext(), list, new CategoryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Category category) {
-                Intent intent = new Intent(getActivity(), ProductActivity.class);
-                intent.putExtra("Category",category);
-                startActivity(intent);
-            }
-        });
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(adapter);
+            getList();
         return view;
     }
     private List<Category> getListCung() {
@@ -110,7 +100,7 @@ public class CategoryFragment extends Fragment {
         list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
         return list;
     }
-    static final  String BASE_URL="http://192.168.0.104:3000/.../";
+    static final  String BASE_URL="http://192.168.0.100:3000/api/";
     private void getList(){
         Retrofit retrofit = RetrofitService.getClient(BASE_URL);
         CategoryInterface categoryInterface = retrofit.create(CategoryInterface.class);
@@ -128,6 +118,8 @@ public class CategoryFragment extends Fragment {
                         public void onItemClick(Category category) {
                                 //String
                             Intent intent = new Intent(getActivity(), ProductActivity.class);
+                            intent.putExtra("Category",category);
+                            startActivity(intent);
                         }
                     });
                     GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
@@ -138,7 +130,8 @@ public class CategoryFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-
+                Log.e("RetrofitError", "onFailure: ", t);
+                Toast.makeText(getActivity(), "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

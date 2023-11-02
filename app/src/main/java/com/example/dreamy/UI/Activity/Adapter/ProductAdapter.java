@@ -11,20 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Model.Category;
 import com.example.dreamy.UI.Activity.Model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Callback;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
     private Context context;
     private List<Product> list= new ArrayList<>();
     private OnItemClickListener listener;
-
+   public void updateData(ArrayList<Product> newProducts){
+            this.list = newProducts;
+            notifyDataSetChanged();
+    }
     public ProductAdapter(Context context, List<Product> list, OnItemClickListener listener) {
         this.context = context;
         this.list = list;
@@ -45,7 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
                 return;
             }
             holder.item_name.setText(product.getTen());
-            holder.item_gia.setText(product.getGia());
+            holder.item_gia.setText(product.getGia()+"đ");
         Picasso.get().load(product.getImg()).into(holder.item_img);
     }
 
