@@ -8,24 +8,26 @@ public class Product implements Serializable {
     private String manhasanxuat ;
     private String maloai ;
     private String ngaynhap ;
-    private String soluong ;
+
     private String ghichu ;
-    private String gia ;
+    private double gia ;
     private String img ;
+    private String ten_san_pham ;
+    private String ten_loai_san_pham ;
     public Product() {
     }
 
-
-    public Product(String id, String ten, String manhasanxuat, String maloai, String ngaynhap, String soluong, String ghichu, String gia, String img) {
+    public Product(String id, String ten, String manhasanxuat, String maloai, String ngaynhap, String ghichu, double gia, String img, String ten_san_pham, String ten_loai_san_pham) {
         this.id = id;
         this.ten = ten;
         this.manhasanxuat = manhasanxuat;
         this.maloai = maloai;
         this.ngaynhap = ngaynhap;
-        this.soluong = soluong;
         this.ghichu = ghichu;
         this.gia = gia;
-        this.img = img ;
+        this.img = img;
+        this.ten_san_pham = ten_san_pham;
+        this.ten_loai_san_pham = ten_loai_san_pham;
     }
 
     public String getId() {
@@ -68,14 +70,6 @@ public class Product implements Serializable {
         this.ngaynhap = ngaynhap;
     }
 
-    public String getSoluong() {
-        return soluong;
-    }
-
-    public void setSoluong(String soluong) {
-        this.soluong = soluong;
-    }
-
     public String getGhichu() {
         return ghichu;
     }
@@ -84,19 +78,35 @@ public class Product implements Serializable {
         this.ghichu = ghichu;
     }
 
-    public String getGia() {
+    public double getGia() {
         return gia;
     }
 
-    public void setGia(String gia) {
+    public void setGia(double gia) {
         this.gia = gia;
-    }
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getImg() {
         return img;
     }
 
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getTen_san_pham() {
+        return ten_san_pham;
+    }
+
+    public void setTen_san_pham(String ten_san_pham) {
+        this.ten_san_pham = ten_san_pham;
+    }
+
+    public String getTen_loai_san_pham() {
+        return ten_loai_san_pham;
+    }
+
+    public void setTen_loai_san_pham(String ten_loai_san_pham) {
+        this.ten_loai_san_pham = ten_loai_san_pham;
+    }
 }

@@ -21,9 +21,10 @@ import com.example.dreamy.UI.Activity.Fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView image_cart;
+    ImageView image_cart,img_search;
     EditText ed_search;
     LinearLayout linearLayout;
+
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,26 +58,14 @@ public class MainActivity extends AppCompatActivity {
         });
        ed_search = findViewById(R.id.ed_search);
         image_cart= findViewById(R.id.img_cart);
+        img_search = findViewById(R.id.img_search);
         image_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
-        ed_search.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                final  int DRAWABLE_LEFT = 0;
-                if (motionEvent.getAction()==MotionEvent.ACTION_UP){
-                    if(motionEvent.getRawX() <= (ed_search.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())) {
-                        // Thực hiện công việc tìm kiếm ở đây
-                        replaceFragment(new ChatboxFragment());
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+        sreach();
     }
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -84,5 +73,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
-
+    private  void sreach(){
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    String name_sreach = ed_search.getText().toString();
+                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+                intent.putExtra("name_sreach",name_sreach);
+                startActivity(intent);
+            }
+        });
+    }
 }
