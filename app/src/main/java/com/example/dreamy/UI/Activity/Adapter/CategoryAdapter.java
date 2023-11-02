@@ -42,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         if (category==null){
             return;
         }
-        Picasso.get().load(category.getImage()).into(holder.item_img);
+        Picasso.get().load(category.getImg()).into(holder.item_img);
         holder.item_name.setText(category.getTen());
     }
 
