@@ -38,8 +38,6 @@ public class FeedBackActivity extends AppCompatActivity {
         rtb_quanao.setRating(5);
         rtb_nguoiban.setRating(5);
         rtb_ship.setRating(5);
-
-
     }
 
     public void onSendClick(View view) {
