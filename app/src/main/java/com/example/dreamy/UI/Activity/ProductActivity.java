@@ -1,6 +1,7 @@
 package com.example.dreamy.UI.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,7 @@ public class ProductActivity extends AppCompatActivity {
     ProductAdapter productAdapter;
     RecyclerView recyclerView;
     Category category ;
+    Product product;
     Button btn_loc ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class ProductActivity extends AppCompatActivity {
         imgback= findViewById(R.id.img_back);
         btn_loc = findViewById(R.id.btn_loc);
         category = (Category) getIntent().getSerializableExtra("Category");
+        category = (Category) getIntent().getSerializableExtra("Product");
         textView.setText(category.getTen());
         list = new ArrayList<>();
         Log.d("id_loaisp", "onCreate: "+ category.getId());
@@ -65,11 +68,11 @@ public class ProductActivity extends AppCompatActivity {
      //   locsp();
 
     }
-    static final  String BASE_URL="http://192.168.0.100:3000/api/";
+
     private void getList(){
 
             // api lay du lieu sp theo loai sp o day
-            Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+            Retrofit retrofit = RetrofitService.getClient();
             ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);
             Call<List<Product>> call = iProductsInterface.getList(category.getId());
             call.enqueue(new Callback<List<Product>>() {
@@ -80,13 +83,9 @@ public class ProductActivity extends AppCompatActivity {
                         list.addAll(response.body());
                         Log.d("listsp", "onResponse: "+list);
                         Log.d("listspbody", "onResponse: "+ response.body());
-                        productAdapter = new ProductAdapter(ProductActivity.this, list, new ProductAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(Product product) {
-
-                            }
-                        });
+                        productAdapter = new ProductAdapter(ProductActivity.this, list);
                         GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
+
                         recyclerView.setLayoutManager(gridLayoutManager);
                         recyclerView.setAdapter(productAdapter);
                     }
@@ -136,5 +135,7 @@ public class ProductActivity extends AppCompatActivity {
         spin_size.setAdapter(adapter1);
 
     }
+
+
 
 }

@@ -14,4 +14,6 @@ public interface ProductsInterface {
     Call<List<Product>> getList(@Query("ma_loai")String loaisp);
     @GET("sanpham")
     Call<List<Product>> getListHome();
+    @GET("sanphams")
+    Call<List<Product>> getListbyMaNhaSanSuat(@Query("manhasanxuat")String s);
 }

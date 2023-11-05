@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -87,22 +89,24 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
          view =inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = view.findViewById(R.id.rcv_category);
+        setRecyclerView();
         list = new ArrayList<Category>();
 
             getList();
         return view;
     }
-    private List<Category> getListCung() {
-        List<Category> list = new ArrayList<>();
-        list.add(new Category("1","Ao Nu","https://taoanhdep.com/wp-content/uploads/2022/08/65d0d901c19d92bded2e1a0defa3b95e_original-350x265.jpeg","kkk"));
-        list.add(new Category("2","Quan Nu","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0A94uzQPEKw42s3TrWP8vkmrHPpJAoaOzA&usqp=CAU","kkk"));
-        list.add(new Category("3","Vay Nu","https://pos.nvncdn.net/792dd7-10067/ps/20230524_0jiamAyCsD.jpeg","kkk"));
-        list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
-        return list;
-    }
-    static final  String BASE_URL="http://192.168.0.100:3000/api/";
+//    private List<Category> getListCung() {
+//        List<Category> list = new ArrayList<>();
+//        list.add(new Category("1","Ao Nu","https://taoanhdep.com/wp-content/uploads/2022/08/65d0d901c19d92bded2e1a0defa3b95e_original-350x265.jpeg","kkk"));
+//        list.add(new Category("2","Quan Nu","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO0A94uzQPEKw42s3TrWP8vkmrHPpJAoaOzA&usqp=CAU","kkk"));
+//        list.add(new Category("3","Vay Nu","https://pos.nvncdn.net/792dd7-10067/ps/20230524_0jiamAyCsD.jpeg","kkk"));
+//        list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
+//        return list;
+//    }
+
+
     private void getList(){
-        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        Retrofit retrofit = RetrofitService.getClient();
         CategoryInterface categoryInterface = retrofit.create(CategoryInterface.class);
         Call<List<Category>> call = categoryInterface.getList();
         call.enqueue(new Callback<List<Category>>() {
@@ -113,17 +117,8 @@ public class CategoryFragment extends Fragment {
                     list.addAll(response.body());
                     Log.d("zzzzzzzz", "onResponse: "+list);
                     Log.d("zzzzzzzzzzzz", "onResponse: "+ response.body());
-                    adapter = new CategoryAdapter(getContext(), list, new CategoryAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Category category) {
-                                //String
-                            Intent intent = new Intent(getActivity(), ProductActivity.class);
-                            intent.putExtra("Category",category);
-                            startActivity(intent);
-                        }
-                    });
-                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
-                    recyclerView.setLayoutManager(gridLayoutManager);
+                    adapter = new CategoryAdapter(getContext(), list);
+
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -134,5 +129,12 @@ public class CategoryFragment extends Fragment {
                 Toast.makeText(getActivity(), "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setRecyclerView() {
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
+        recyclerView.setItemAnimator(itemAnimator);
     }
 }

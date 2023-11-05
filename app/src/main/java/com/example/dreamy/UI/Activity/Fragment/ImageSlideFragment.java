@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Model.ImageProduct;
 import com.example.dreamy.UI.Activity.Model.PhotoSlide;
+import com.squareup.picasso.Picasso;
 
 
 public class ImageSlideFragment extends Fragment {
@@ -21,11 +23,10 @@ public class ImageSlideFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_slide, container, false);
         Bundle bundle = getArguments();
-        PhotoSlide photo = (PhotoSlide) bundle.get("photo");
+        ImageProduct photo = (ImageProduct) bundle.get("photo");
 
         imageView = view.findViewById(R.id.img_slide);
-
-        imageView.setImageResource(photo.getResourceId());
+        Picasso.get().load(photo.getSource()).into(imageView);
         return view;
     }
 }
