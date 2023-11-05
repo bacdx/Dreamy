@@ -14,10 +14,12 @@
         android:theme="@style/Theme.Dreamy"
         tools:targetApi="31">
         <activity
+
             android:name=".UI.Activity.CartActivity"
             android:exported="false" >
         </activity>
         <activity
+
             android:name=".UI.Activity.FeedBackActivity"
             android:exported="false" >
         </activity>
