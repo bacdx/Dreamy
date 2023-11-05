@@ -1,6 +1,7 @@
 package com.example.dreamy.UI.Activity.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Model.ImageProduct;
 import com.example.dreamy.UI.Activity.Model.Product;
+import com.example.dreamy.UI.Activity.ProductActivity;
+import com.example.dreamy.UI.Activity.ProductDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,15 +26,16 @@ import retrofit2.Callback;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
     private Context context;
     private List<Product> list= new ArrayList<>();
-    private OnItemClickListener listener;
+
+
    public void updateData(ArrayList<Product> newProducts){
             this.list = newProducts;
             notifyDataSetChanged();
     }
-    public ProductAdapter(Context context, List<Product> list, OnItemClickListener listener) {
+    public ProductAdapter(Context context, List<Product> list) {
         this.context = context;
         this.list = list;
-        this.listener = listener;
+
     }
 
     @NonNull
@@ -49,6 +54,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             holder.item_name.setText(product.getTen());
             holder.item_gia.setText(product.getGia()+"đ");
         Picasso.get().load(product.getImg()).into(holder.item_img);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ProductDetailsActivity.class);
+                intent.putExtra("Product",product);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,21 +81,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             item_gia = itemView.findViewById(R.id.item_gia);
             item_name = itemView.findViewById(R.id.item_name);
             item_img = itemView.findViewById(R.id.item_img);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                           Product product =list.get(position);
-                            listener.onItemClick(product);
-                        }
-                    }
-                }
-            });
+
         }
     }
-    public interface OnItemClickListener {
-        void onItemClick(Product product);
-    }
+
 }
