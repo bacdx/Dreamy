@@ -95,6 +95,7 @@ public class CategoryFragment extends Fragment {
             getList();
         return view;
     }
+
 //    private List<Category> getListCung() {
 //        List<Category> list = new ArrayList<>();
 //        list.add(new Category("1","Ao Nu","https://taoanhdep.com/wp-content/uploads/2022/08/65d0d901c19d92bded2e1a0defa3b95e_original-350x265.jpeg","kkk"));
@@ -103,6 +104,7 @@ public class CategoryFragment extends Fragment {
 //        list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
 //        return list;
 //    }
+
 
 
     private void getList(){

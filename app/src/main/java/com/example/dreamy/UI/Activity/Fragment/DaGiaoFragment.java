@@ -7,60 +7,74 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Adapter.HoaDonAdapter;
+import com.example.dreamy.UI.Activity.Model.CategoryPhake;
+import com.example.dreamy.UI.Activity.Model.Order;
+import com.example.dreamy.UI.Activity.Utils.OrderStatus;
+import com.example.dreamy.databinding.FragmentDaGiaoBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DaGiaoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class DaGiaoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DaGiaoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DaGiaoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DaGiaoFragment newInstance(String param1, String param2) {
-        DaGiaoFragment fragment = new DaGiaoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    FragmentDaGiaoBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_da_giao, container, false);
+        binding = FragmentDaGiaoBinding.inflate(getLayoutInflater());
+
+        HoaDonAdapter adapter = new HoaDonAdapter(getContext(),getOrders(), () ->{
+            Toast.makeText(requireContext(), "Do Something", Toast.LENGTH_SHORT).show();
+        });
+        binding.rcvDonHang.setAdapter(adapter);
+
+        return binding.getRoot();
+    }
+
+    private List<Order> getOrders(){
+        List<Order> lists = new ArrayList<>();
+        lists.add(new Order("","VN-2145", OrderStatus.GIAO_THANH_CONG,getRandom()));
+        lists.add(new Order("","VN-6585",OrderStatus.GIAO_THANH_CONG,getRandom()));
+        lists.add(new Order("","VN-5984",OrderStatus.GIAO_THANH_CONG,getRandom()));
+        return lists;
+    }
+
+    private List<CategoryPhake> getRandom(){
+        List<CategoryPhake> lists = new ArrayList<>();
+        List<CategoryPhake> defaulList = getCategoryPhakes();
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            int position = random.nextInt(defaulList.size() - 1);
+            lists.add(defaulList.get(position));
+            defaulList.remove(position);
+        }
+
+        return lists;
+    }
+
+    private List<CategoryPhake> getCategoryPhakes(){
+        List<CategoryPhake> lists = new ArrayList<>();
+        lists.add(new CategoryPhake("","Váy tím đính viền ngọc cổ vuông","","","S","","1", "","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-tim-dinh-vien-ngoc-co-vuong-v3973-600x600.jpg"));
+        lists.add(new CategoryPhake("","Váy hoa nhí tay cánh tiên","","","M","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-hoa-nhi-tay-canh-tien-v3983-600x600.jpg"));
+        lists.add(new CategoryPhake("","Váy đen công sở cổ v dáng xòe sang trọng","","","L","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-den-cong-so-co-v-dang-xoe-sang-trong-v3980-600x600.jpg"));
+        lists.add(new CategoryPhake("","Váy xanh đai eo cổ vuông sang trọng","","","M","","2","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-xanh-dai-eo-co-vuong-sang-trong-v4076-1-600x600.jpg"));
+        lists.add(new CategoryPhake("","Váy đen xòe cổ V tay bèo","","","M","","2","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-den-xoe-co-v-tay-beo-v4011-600x600.jpg"));
+        lists.add(new CategoryPhake("","Váy kẻ đen trắng cổ sơ mi dáng dài","","","L","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-ke-den-trang-co-so-mi-dang-dai-v4018-600x600.jpg"));
+        return lists;
     }
 }

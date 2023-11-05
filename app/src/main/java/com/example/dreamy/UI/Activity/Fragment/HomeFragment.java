@@ -142,6 +142,8 @@ public class HomeFragment extends Fragment {
         }, 3000, 4000);
     }
 
+
+
     private void listRandom(){
         Retrofit retrofit = RetrofitService.getClient();
         ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);

@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"

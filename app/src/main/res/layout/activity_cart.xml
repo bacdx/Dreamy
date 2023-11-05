@@ -15,6 +15,7 @@
         android:background="#FFFFFF"
         android:orientation="horizontal"
         android:padding="5dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,36 +23,49 @@
 
         <ImageView
             android:id="@+id/img_back"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/iconback" />
 
         <CheckBox
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/bg_checkbox_unactive" />
+
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_search_24" />
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/tv_name_category"
-            android:layout_width="0dp"
+            android:id="@+id/tvLichSu"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_weight="5"
-            android:fontFamily="@font/font2"
+            android:fontFamily="@font/font1"
             android:gravity="center"
-            android:text="Giỏ hàng"
-            android:textSize="22dp" />
+            android:text="Lịch sử"
+            android:layout_marginEnd="6dp"
+            android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/favorties" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_name_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/font2"
+        android:gravity="center"
+        android:text="Giỏ hàng"
+        android:textSize="22dp"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_cart"
