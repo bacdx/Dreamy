@@ -100,7 +100,7 @@ public class CategoryFragment extends Fragment {
         list.add(new Category("4","Do ngu","https://storage.googleapis.com/ops-shopee-files-live/live/shopee-blog/2022/01/d416d677-do-ngu-thumb.jpg","kkk"));
         return list;
     }
-    static final  String BASE_URL="http://192.168.0.100:3000/api/";
+    static final  String BASE_URL="http://192.168.0.102:3000/api/";
     private void getList(){
         Retrofit retrofit = RetrofitService.getClient(BASE_URL);
         CategoryInterface categoryInterface = retrofit.create(CategoryInterface.class);

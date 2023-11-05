@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,11 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
             }
+        });
+
+
+        findViewById(R.id.tvLichSu).setOnClickListener(view -> {
+            startActivity(new Intent(this, HistoryActivity.class));
         });
     }
 

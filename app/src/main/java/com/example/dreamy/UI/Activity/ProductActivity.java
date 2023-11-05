@@ -65,7 +65,7 @@ public class ProductActivity extends AppCompatActivity {
      //   locsp();
 
     }
-    static final  String BASE_URL="http://192.168.0.100:3000/api/";
+    static final  String BASE_URL="http://192.168.0.102:3000/api/";
     private void getList(){
 
             // api lay du lieu sp theo loai sp o day
