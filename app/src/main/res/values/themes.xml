@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.Dreamy" parent="Base.Theme.Dreamy" />
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#C4C4C4</item>
+        <item name="colorControlActivated">#EBE5C03B</item>
+    </style>
 </resources>
