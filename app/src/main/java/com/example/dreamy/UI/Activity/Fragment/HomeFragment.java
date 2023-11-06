@@ -1,5 +1,6 @@
 package com.example.dreamy.UI.Activity.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.example.dreamy.UI.Activity.Interface.RetrofitService;
 import com.example.dreamy.UI.Activity.Model.PhotoSlide;
 import com.example.dreamy.UI.Activity.Model.Product;
 import com.example.dreamy.UI.Activity.ProductActivity;
+import com.example.dreamy.UI.Activity.ProductDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,7 +159,9 @@ public class HomeFragment extends Fragment {
                     productAdapter = new ProductAdapter(getContext(), list, new ProductAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(Product product) {
-
+                            Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+                            intent.putExtra("Products",product);
+                            startActivity(intent);
                         }
                     });
                     GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);

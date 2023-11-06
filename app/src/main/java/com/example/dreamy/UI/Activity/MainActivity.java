@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.Fragment.CategoryFragment;
@@ -77,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    String name_sreach = ed_search.getText().toString();
-                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
-                intent.putExtra("name_sreach",name_sreach);
-                startActivity(intent);
+                String name_sreach = ed_search.getText().toString();
+                if (name_sreach==null){
+                    Toast.makeText(MainActivity.this,"Vui lòng nhập tên sản phẩm ạn muốn tìm kiếm",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

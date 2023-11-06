@@ -2,52 +2,68 @@ package com.example.dreamy.UI.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Adapter.ColorAdapter;
+import com.example.dreamy.UI.Activity.Adapter.SizeAdapter;
+import com.example.dreamy.UI.Activity.Adapter.SlideProductsAdapter;
 import com.example.dreamy.UI.Activity.Fragment.ImageSlideFragment;
+import com.example.dreamy.UI.Activity.Interface.ProductsInterface;
+import com.example.dreamy.UI.Activity.Interface.RetrofitService;
+import com.example.dreamy.UI.Activity.Model.Color;
+import com.example.dreamy.UI.Activity.Model.PhotoProducts;
 import com.example.dreamy.UI.Activity.Model.PhotoSlide;
+import com.example.dreamy.UI.Activity.Model.Product;
+import com.example.dreamy.UI.Activity.Model.Size;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.CircleIndicator3;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    private ViewPager2 mViewPager2;
-    private RecyclerView mRecyclerViewColor;
-    private CircleIndicator3 mCircleIndicator3;
+    private ViewPager mViewPager2;
+    private RecyclerView mRecyclerViewColor , rcv_size;
 
-    private List<PhotoSlide> mPhotoList;
-
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            int currentPosition = mViewPager2.getCurrentItem();
-            if (currentPosition == mPhotoList.size()-1){
-                mViewPager2.setCurrentItem(0);
-            }else {
-                mViewPager2.setCurrentItem(currentPosition + 1);
-            }
-        }
-    };
-
+    private CircleIndicator mCircleIndicator3;
+    TextView tv_name , tv_price ;
+    SizeAdapter sizeAdapter ;
+    ColorAdapter colorAdapter;
+    SlideProductsAdapter slideProductsAdapter;
+    ImageView imgBack ;
+    List<PhotoProducts> photoProductsList ;
+    List<Size> sizeList ;
+    List<Color> colorList;
+    Product product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,109 +72,114 @@ public class ProductDetailsActivity extends AppCompatActivity {
         mViewPager2 = findViewById(R.id.view_pager2);
         mCircleIndicator3 = findViewById(R.id.circle_indicator3);
         mRecyclerViewColor = findViewById(R.id.rcvColor);
+        imgBack = findViewById(R.id.img_back);
+        rcv_size = findViewById(R.id.rcv_size);
+        tv_name = findViewById(R.id.tvName);
+        tv_price=findViewById(R.id.tvPrice);
+        product = (Product) getIntent().getSerializableExtra("Products");
+        back();
+        tv_name.setText(product.getTen());
+        tv_price.setText(product.getGia()+"đ");
+        photoProductsList = new ArrayList<>();
+        sizeList = new ArrayList<>();
+        colorList = new ArrayList<>();
+        getDataImg();
 
-        mPhotoList = getListPhoto();
+        getDataColor();
+        getDataSize();
 
-        AdapterImageSlide adapterImageSlide = new AdapterImageSlide(this,mPhotoList);
-        mViewPager2.setAdapter(adapterImageSlide);
-        mCircleIndicator3.setViewPager(mViewPager2);
-
-        mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+    }
+    public void back(){
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                handler.removeCallbacks(runnable);
-                handler.postDelayed(runnable,3000);
+            public void onClick(View view) {
+                finish();
+
             }
         });
-
-        AdapterColor adapterColor = new AdapterColor();
-        adapterColor.setColors(getColor());
-        mRecyclerViewColor.setAdapter(adapterColor);
     }
-
-    private List<PhotoSlide> getListPhoto(){
-        List<PhotoSlide> list = new ArrayList<>();
-        list.add(new PhotoSlide(R.drawable.slide_img1));
-        list.add(new PhotoSlide(R.drawable.slide_img1));
-        list.add(new PhotoSlide(R.drawable.slide_img1));
-        list.add(new PhotoSlide(R.drawable.slide_img1));
-        list.add(new PhotoSlide(R.drawable.slide_img1));
-        return list;
-    }
-
-    private List<String> getColor(){
-        List<String> list = new ArrayList<>();
-        list.add("#683F3F");
-        list.add("#B1834D");
-        list.add("#0F0E0E");
-        return list;
-    }
-
-    public class AdapterImageSlide extends FragmentStateAdapter {
-
-        private List<PhotoSlide> photoList;
-
-        public AdapterImageSlide(FragmentActivity fragmentActivity, List<PhotoSlide> list) {
-            super(fragmentActivity);
-            this.photoList = list;
-        }
-
-
-        @Override
-        public Fragment createFragment(int position) {
-
-            PhotoSlide photo = photoList.get(position);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("photo",photo);
-
-            ImageSlideFragment imageSlideFragment = new ImageSlideFragment();
-            imageSlideFragment.setArguments(bundle);
-
-            return imageSlideFragment;
-        }
-
-        @Override
-        public int getItemCount() {
-            if (photoList!=null){
-                return photoList.size();
+    static final  String BASE_URL="http://192.168.0.100:3000/api/";
+    public void getDataSize(){
+        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        ProductsInterface productsInterface = retrofit.create(ProductsInterface.class);
+        Call<List<Size>> call = productsInterface.getListSize(product.getId());
+        call.enqueue(new Callback<List<Size>>() {
+            @Override
+            public void onResponse(Call<List<Size>> call, Response<List<Size>> response) {
+                if (response.isSuccessful()){
+                    sizeList.clear();
+                    sizeList.addAll(response.body());
+                    sizeAdapter = new SizeAdapter(ProductDetailsActivity.this,sizeList);
+                    GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductDetailsActivity.this,6);
+                    rcv_size.setLayoutManager(gridLayoutManager);
+                    rcv_size.setAdapter(sizeAdapter);
+                }
             }
-            return 0;
-        }
-    }
 
-    public class AdapterColor extends RecyclerView.Adapter<AdapterColor.ViewHolder>{
-        List<String> colors;
+            @Override
+            public void onFailure(Call<List<Size>> call, Throwable t) {
+                Log.e("RetrofitError", "onFailure: ", t);
+                Toast.makeText(ProductDetailsActivity.this, "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
-        public void setColors(List<String> colors){
-            this.colors = colors;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_select_color,parent,false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            holder.view.setBackgroundColor(Color.parseColor(colors.get(position)));
-        }
-
-        @Override
-        public int getItemCount() {
-            return colors.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            private View view;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                view = itemView.findViewById(R.id.item_view_color);
             }
-        }
+        });
     }
+    public void getDataColor(){
+        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        ProductsInterface productsInterface = retrofit.create(ProductsInterface.class);
+        Call<List<Color>> call = productsInterface.getListColor(product.getId());
+        call.enqueue(new Callback<List<Color>>() {
+           @Override
+           public void onResponse(Call<List<Color>> call, Response<List<Color>> response) {
+               if (response.isSuccessful()){
+                   colorList.clear();
+                   colorList.addAll(response.body());
+                   colorAdapter = new ColorAdapter(ProductDetailsActivity.this,colorList);
+                   GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductDetailsActivity.this,8);
+                   mRecyclerViewColor.setLayoutManager(gridLayoutManager);
+                   mRecyclerViewColor.setAdapter(colorAdapter);
+               }
+
+           }
+
+           @Override
+           public void onFailure(Call<List<Color>> call, Throwable t) {
+               Log.e("RetrofitError", "onFailure: ", t);
+               Toast.makeText(ProductDetailsActivity.this, "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+           }
+       });
+    }
+    public void getDataImg(){
+        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        ProductsInterface productsInterface = retrofit.create(ProductsInterface.class);
+        Call<List<PhotoProducts>> call = productsInterface.getListImage(product.getId());
+        call.enqueue(new Callback<List<PhotoProducts>>() {
+            @Override
+            public void onResponse(Call<List<PhotoProducts>> call, Response<List<PhotoProducts>> response) {
+                if (response.isSuccessful()){
+                    photoProductsList.clear();
+                    photoProductsList.addAll(response.body());
+                    slideProductsAdapter=new SlideProductsAdapter(ProductDetailsActivity.this,photoProductsList);
+                    mViewPager2.setAdapter(slideProductsAdapter);
+                    mCircleIndicator3.setViewPager(mViewPager2);
+                    slideProductsAdapter.registerDataSetObserver(mCircleIndicator3.getDataSetObserver());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PhotoProducts>> call, Throwable t) {
+                Log.e("RetrofitError", "onFailure: ", t);
+                Toast.makeText(ProductDetailsActivity.this, "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
+
+
+
+
 
 }

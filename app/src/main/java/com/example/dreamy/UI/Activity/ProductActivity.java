@@ -56,7 +56,11 @@ public class ProductActivity extends AppCompatActivity {
         imgback= findViewById(R.id.img_back);
         btn_loc = findViewById(R.id.btn_loc);
         category = (Category) getIntent().getSerializableExtra("Category");
-        textView.setText(category.getTen());
+        if (category==null){
+            textView.setText("Danh sách sản phẩm");
+        }else
+            textView.setText(category.getTen());
+
         list = new ArrayList<>();
         Log.d("id_loaisp", "onCreate: "+ category.getId());
         back();
@@ -67,6 +71,7 @@ public class ProductActivity extends AppCompatActivity {
     }
     static final  String BASE_URL="http://192.168.0.100:3000/api/";
     private void getList(){
+
 
             // api lay du lieu sp theo loai sp o day
             Retrofit retrofit = RetrofitService.getClient(BASE_URL);
@@ -83,7 +88,9 @@ public class ProductActivity extends AppCompatActivity {
                         productAdapter = new ProductAdapter(ProductActivity.this, list, new ProductAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(Product product) {
-
+                                Intent intent = new Intent(ProductActivity.this, ProductDetailsActivity.class);
+                                intent.putExtra("Products",product);
+                                startActivity(intent);
                             }
                         });
                         GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
