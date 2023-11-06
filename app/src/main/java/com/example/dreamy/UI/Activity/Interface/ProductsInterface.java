@@ -12,6 +12,8 @@ import retrofit2.http.Query;
 public interface ProductsInterface {
     @GET("sanphams")
     Call<List<Product>> getList(@Query("ma_loai")String loaisp);
+    @GET("sanphams")
+    Call<List<Product>> getListByIDs(@Query("ma_loai")String loaisp);
     @GET("sanpham")
     Call<List<Product>> getListHome();
     @GET("sanphams")

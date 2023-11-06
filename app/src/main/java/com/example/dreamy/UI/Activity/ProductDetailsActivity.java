@@ -11,6 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,10 +19,12 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.Adapter.CategoryAdapter;
 import com.example.dreamy.UI.Activity.Adapter.ProductAdapter;
 import com.example.dreamy.UI.Activity.Fragment.ImageSlideFragment;
 import com.example.dreamy.UI.Activity.Interface.ColorInterface;
@@ -33,7 +36,10 @@ import com.example.dreamy.UI.Activity.Model.ImageProduct;
 import com.example.dreamy.UI.Activity.Model.PhotoSlide;
 import com.example.dreamy.UI.Activity.Model.Product;
 import com.example.dreamy.UI.Activity.Model.Size;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +50,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ProductDetailsActivity extends AppCompatActivity {
+    public static final int BYLOAI=0;
+    public static final int BYNSX=1;
 private TextView title;
     private ViewPager2 mViewPager2;
+    private ImageView btnAddCart;
     private RecyclerView mRecyclerViewColor;
     private RecyclerView mRecyclerViewSize;
     private RecyclerView mRecyclerViewlistProduct;
+    private RecyclerView mRecyclerViewlistProductByKind;
     private CircleIndicator3 mCircleIndicator3;
     private  AdapterImageSlide adapterImageSlide;
     private ProductAdapter productAdapter;
@@ -56,8 +66,16 @@ private TextView title;
     private Product product;
     private AdapterColor adapterColor;
     private AdapterSize adapterSize;
+    private SharedPreferences sharedPreferences;
     private Handler handler = new Handler(Looper.getMainLooper());
     private  Retrofit service=RetrofitService.getClient();
+    View.OnClickListener addCardOnClick=new CategoryAdapter.OnItemClickListener() {
+        @Override
+        public void onClick(View view) {
+            addFavorties(product.getId());
+            Toast.makeText(ProductDetailsActivity.this,"Tem Thanh Cong ",Toast.LENGTH_LONG).show();
+        }
+    };
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -82,6 +100,9 @@ private TextView title;
         mRecyclerViewColor = findViewById(R.id.rcvColor);
         mRecyclerViewSize = findViewById(R.id.rcvsize);
         mRecyclerViewlistProduct=findViewById(R.id.rcv_listsp);
+        mRecyclerViewlistProductByKind=findViewById(R.id.rcv_listsp1);
+        btnAddCart=findViewById(R.id.addCart);
+        btnAddCart.setOnClickListener(addCardOnClick);
         title=findViewById(R.id.title);
 //        title.setText(product.set);
         //setImg
@@ -93,7 +114,8 @@ private TextView title;
         adapterSize=new AdapterSize();
         setSize();
         //set list sp cung loai
-        setlistProduct();
+        setlistProduct(BYLOAI,mRecyclerViewlistProduct);
+        setlistProduct(BYNSX,mRecyclerViewlistProductByKind);
 
         mCircleIndicator3.setViewPager(mViewPager2);
 
@@ -207,19 +229,25 @@ private TextView title;
         });
     }
 
-    private void setlistProduct() {
+    private void setlistProduct(int type,RecyclerView recyclerView) {
 
 
         ProductsInterface productsInterface=service.create(ProductsInterface.class);
-        Call<List<Product>> call=productsInterface.getListbyMaNhaSanSuat(product.getManhasanxuat());
+        Call<List<Product>> call;
+        if(type==BYLOAI){
+        call=productsInterface.getList(product.getMaloai());
+        }else  {
+          call=productsInterface.getListbyMaNhaSanSuat(product.getManhasanxuat());
+        }
+
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if(response.isSuccessful()){
                     productAdapter=new ProductAdapter(ProductDetailsActivity.this,response.body());
                     GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductDetailsActivity.this,2);
-                    mRecyclerViewlistProduct.setLayoutManager(gridLayoutManager);
-                    mRecyclerViewlistProduct.setAdapter(productAdapter);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    recyclerView.setAdapter(productAdapter);
                 }
             }
 
@@ -229,6 +257,37 @@ private TextView title;
             }
         });
     }
+
+    public void addFavorties(String id ){
+        List<String> integers=getFavorties();
+        integers.add(id);
+        Type messageListType = new TypeToken<List<Integer>>() {
+        }.getType();
+        String json =new Gson().toJson(integers,messageListType);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("myIntegerList", json);
+        editor.apply();
+    }
+    public   List<String>  getFavorties(){
+        List<String> list1=new ArrayList<>();
+        Type messageListType = new TypeToken<List<String>>() {
+        }.getType();
+        String json =new Gson().toJson(list1,messageListType);
+
+        sharedPreferences= getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),getApplicationContext().MODE_PRIVATE);
+        String serializedList = sharedPreferences.getString("myIntegerList", "");
+        if (serializedList.isEmpty()) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("myIntegerList",json);
+            return list1;
+        } else {
+            List<String> myList = new Gson().fromJson(serializedList, new TypeToken<List<Integer>>() {}.getType());
+            return myList;
+        }
+    }
+
+
 
     public class AdapterColor extends RecyclerView.Adapter<AdapterColor.ViewHolder>{
         List<com.example.dreamy.UI.Activity.Model.Color> colors;

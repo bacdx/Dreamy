@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dreamy.Database.SQL.model.Product;
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.Model.Cart;
 import com.squareup.picasso.Picasso;
@@ -23,8 +24,8 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder>{
     private Context context;
-    private List<Cart> cartList = new ArrayList<>();
-    public CartAdapter(Context context, List<Cart> cartList) {
+    private List<Product> cartList = new ArrayList<>();
+    public CartAdapter(Context context, List<Product> cartList) {
         this.context = context;
         this.cartList = cartList;
     }
@@ -38,17 +39,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
-        Cart cart = cartList.get(position);
+        Product cart = cartList.get(position);
         if (cart==null){
             return;
         }
 
-        holder.item_gia.setText(cart.getGia()+"d");
+        holder.item_gia.setText(cart.getPrice()+"d");
         holder.item_name.setText(cart.getTen());
         Picasso.get().load(cart.getImg()).into(holder.item_img);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,cart.getSize());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.spinSize.setAdapter(adapter);
+
 
     }
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,10 @@ import com.example.dreamy.UI.Activity.Interface.ProductsInterface;
 import com.example.dreamy.UI.Activity.Interface.RetrofitService;
 import com.example.dreamy.UI.Activity.Model.Category;
 import com.example.dreamy.UI.Activity.Model.Product;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +62,7 @@ public class ProductActivity extends AppCompatActivity {
         imgback= findViewById(R.id.img_back);
         btn_loc = findViewById(R.id.btn_loc);
         category = (Category) getIntent().getSerializableExtra("Category");
-        category = (Category) getIntent().getSerializableExtra("Product");
+
         textView.setText(category.getTen());
         list = new ArrayList<>();
         Log.d("id_loaisp", "onCreate: "+ category.getId());
@@ -135,7 +139,6 @@ public class ProductActivity extends AppCompatActivity {
         spin_size.setAdapter(adapter1);
 
     }
-
 
 
 }
