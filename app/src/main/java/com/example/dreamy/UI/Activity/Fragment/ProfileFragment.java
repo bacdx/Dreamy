@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.FeedBackActivity;
+import com.example.dreamy.UI.Activity.LoginActivity;
 import com.example.dreamy.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
@@ -24,6 +25,10 @@ public class ProfileFragment extends Fragment {
 
         binding.btnDanhGia.setOnClickListener(view -> {
             startActivity(new Intent(requireActivity(), FeedBackActivity.class));
+        });
+        binding.btnDangXuat.setOnClickListener(view ->{
+            startActivity(new Intent(requireActivity(), LoginActivity.class));
+            
         });
 
         return binding.getRoot();

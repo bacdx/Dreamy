@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+
             if(id==R.id.home){
 
                 replaceFragment(new HomeFragment());
