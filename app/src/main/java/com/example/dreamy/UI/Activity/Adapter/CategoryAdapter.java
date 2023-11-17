@@ -1,6 +1,7 @@
 package com.example.dreamy.UI.Activity.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.Model.Category;
+import com.example.dreamy.UI.Activity.ProductActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,12 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder>{
     private Context context;
     private List<Category> categoryList = new ArrayList<>();
-    private OnItemClickListener listener;
 
-    public CategoryAdapter(Context context, List<Category> categoryList, OnItemClickListener listener) {
+
+    public CategoryAdapter(Context context, List<Category> categoryList) {
         this.context = context;
         this.categoryList = categoryList;
-        this.listener = listener;
+
     }
 
     @NonNull
@@ -44,6 +46,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
         Picasso.get().load(category.getImg()).into(holder.item_img);
         holder.item_name.setText(category.getTen());
+        holder.itemView.setOnClickListener(new OnItemClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("Category",category);
+                context.startActivity(intent);
+            }
+
+
+        });
     }
 
     @Override
@@ -58,21 +70,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             super(itemView);
             item_name = itemView.findViewById(R.id.item_name);
             item_img = itemView.findViewById(R.id.item_img);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                           Category category = categoryList.get(position);
-                            listener.onItemClick(category);
-                        }
-                    }
-                }
-            });
+
         }
     }
-    public interface OnItemClickListener {
-        void onItemClick(Category category);
+    public interface OnItemClickListener extends View.OnClickListener  {
+
     }
+
 }

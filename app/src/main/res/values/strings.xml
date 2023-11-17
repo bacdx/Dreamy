@@ -2,4 +2,5 @@
     <string name="app_name">Dreamy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ng_xu_t"><u>Đăng Xuất</u></string>
 </resources>
