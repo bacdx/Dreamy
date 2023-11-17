@@ -1,8 +1,11 @@
 package com.example.dreamy.UI.Activity.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Category implements Serializable {
+
     private String id ;
     private String ten ;
     private String img ;

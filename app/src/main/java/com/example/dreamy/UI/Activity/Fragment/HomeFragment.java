@@ -141,9 +141,11 @@ public class HomeFragment extends Fragment {
             }
         }, 3000, 4000);
     }
-    static final  String BASE_URL="http://192.168.0.102:3000/api/";
+
+
+
     private void listRandom(){
-        Retrofit retrofit = RetrofitService.getClient(BASE_URL);
+        Retrofit retrofit = RetrofitService.getClient();
         ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);
         Call<List<Product>> call = iProductsInterface.getListHome();
         call.enqueue(new Callback<List<Product>>() {
@@ -154,12 +156,7 @@ public class HomeFragment extends Fragment {
                     list.addAll(response.body());
                     Log.d("listsp", "onResponse: "+list);
                     Log.d("listspbody", "onResponse: "+ response.body());
-                    productAdapter = new ProductAdapter(getContext(), list, new ProductAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Product product) {
-
-                        }
-                    });
+                    productAdapter = new ProductAdapter(getContext(), list);
                     GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
                     rcv_home.setLayoutManager(gridLayoutManager);
                     rcv_home.setAdapter(productAdapter);
