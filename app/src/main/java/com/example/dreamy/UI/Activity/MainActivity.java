@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     ImageView image_cart,img_search;
     EditText ed_search;
-    LinearLayout linearLayout;
+    public LinearLayout linearLayout;
 
     BottomNavigationView bottomNavigationView;
     @Override

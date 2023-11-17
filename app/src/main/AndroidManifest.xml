@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,20 +15,29 @@
         android:theme="@style/Theme.Dreamy"
         tools:targetApi="31">
         <activity
+            android:name=".UI.Activity.HoTroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.ChinhSachBaoMatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.RepassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.Activity.CartActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".UI.Activity.FeedBackActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".UI.Activity.HistoryActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".UI.Activity.ProductDetailsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".UI.Activity.MainActivity"
             android:exported="true">
@@ -36,7 +46,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

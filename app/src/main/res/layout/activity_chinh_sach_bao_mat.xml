@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Activity.ChinhSachBaoMatActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I. CHÍNH SÁCH BẢO MẬT"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:paddingVertical="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:textSize="14dp"
+                android:text="khi bạn đăng ký và/hoặc sử dụng Các Dịch Vụ hoặc Nền tảng của chúng tôi, hoặc mở một tài khoản với chúng tôi;
+khi bạn gửi bất kỳ biểu mẫu nào, bao gồm đơn đăng ký hoặc các mẫu đơn khác liên quan đến bất kỳ sản phẩm và dịch vụ nào của chúng tôi, bằng hình thức trực tuyến hay dưới hình thức khác;
+khi bạn ký kết bất kỳ thỏa thuận nào hoặc cung cấp các tài liệu hoặc thông tin khác liên quan đến tương tác giữa bạn với chúng tôi, hoặc khi bạn sử dụng các sản phẩm và dịch vụ của chúng tôi;
+khi bạn tương tác với chúng tôi, chẳng hạn như thông qua các cuộc gọi điện thoại (có thể được ghi âm lại), thư từ, fax, gặp gỡ trực tiếp, các nền ứng dụng truyền thông xã hội và email;
+khi bạn sử dụng các dịch vụ điện tử của chúng tôi, hoặc tương tác với chúng tôi qua Nền tảng hoặc Trang Web hoặc Các Dịch Vụ của chúng tôi. Trường hợp này bao gồm thông qua tập tin cookie mà chúng tôi có thể triển khai khi bạn tương tác với các Nền tảng hoặc Trang Web của chúng tôi;
+khi bạn cấp quyền trên thiết bị của bạn để chia sẻ thông tin với ứng dụng hoặc Nền tảng của chúng tôi
+Khi bạn liên kết tài khoản Shopee với tài khoản mạng xã hội của bạn hoặc các tài khoản bên ngoài khác hoặc sử dụng các tính năng mạng xã hội khác, phù hợp với các chính sách của nhà cung cấp;
+khi bạn thực hiện các giao dịch thông qua Dịch vụ của chúng tôi chẳng hạn như mỗi khi bạn đặt mua hàng hoặc chấp nhận đơn đặt hàng của Người mua;
+khi bạn cung cấp ý kiến phản hồi hoặc gửi khiếu nại cho chúng tôi;
+khi bạn đăng ký tham gia một cuộc thi;
+khi bạn gửi dữ liệu cá nhân của bạn cho chúng tôi vì bất kỳ lý do gì; và/hoặc
+khi bạn thực hiện các hoạt động khác trên Nền tảng của chúng tôi."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:paddingVertical="5dp"
+                android:text=" Chúng tôi có thể thu thập thông tin của bạn từ bạn, các công ty liên kết, các bên thứ ba và từ các nguồn khác, bao gồm nhưng không giới hạn ở đối tác kinh doanh (ví dụ như đơn vị cung ứng dịch vụ vận chuyển, thanh toán), cơ quan đánh giá tín dụng, các đơn vị, đối tác cung cấp dịch vụ marketing, giới thiệu, các chương trình khách hàng thân thiết, những người dùng khác sử dụng Các Dịch Vụ của chúng tôi hoặc các nguồn dữ liệu công khai có sẵn hay các nguồn dữ liệu của nhà nước."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:paddingVertical="5dp"
+                android:text="Trong một số trường hợp, bạn có thể cung cấp dữ liệu cá nhân của các cá nhân khác cho chúng tôi (ví dụ như thành viên gia đình, bạn bè hoặc những người trong danh sách liên hệ của bạn). Nếu bạn cung cấp cho chúng tôi dữ liệu cá nhân của họ, bạn tuyên bố và đảm bảo rằng bạn đã nhận được sự đồng ý của họ để xử lý dữ liệu cá nhân của họ theo Chính sách này."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:paddingVertical="10dp"
+                android:textColor="@color/black"
+                android:text="DREAMY SẼ THU THẬP NHỮNG DỮ LIỆU GÌ?"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="họ tên;
+địa chỉ email;
+ngày sinh;
+địa chỉ thanh toán và/hoặc giao nhận hàng hóa;
+tài khoản ngân hàng và thông tin thanh toán
+số điện thoại;
+giới tính;
+thông tin được gửi bởi hoặc liên quan đến (các) thiết bị được sử dụng để truy cập vào Các Dịch vụ hoặc Nền tảng của chúng tôi;
+thông tin về mạng của bạn, bao gồm danh sách liên hệ của bạn khi đồng ý chia sẻ trên thiết bị của bạn, và những người và tài khoản mà bạn có tương tác;
+hình ảnh hoặc âm thanh hoặc video;
+thông tin về nhân thân được cấp bởi chính phủ hoặc các thông tin khác phục vụ cho các mục đích đánh giá pháp lý, nhận biết khách hàng, xác minh thông tin và/hoặc phòng chống gian lận của chúng tôi;
+dữ liệu truyền thông hoặc liên lạc, ví dụ như các tùy chọn nhận thông tin quảng cáo từ chúng tôi hoặc các bên thứ ba của bạn, tùy chọn phương tiện liên lạc và lịch sử thông tin liên lạc với chúng tôi, các nhà cung cấp dịch vụ của chúng tôi, và các bên thứ ba khác;
+thông tin sử dụng và giao dịch, bao gồm chi tiết về lịch sử tìm kiếm, giao dịch, quảng cáo và nội dung hiển thị mà tương tác với Nền Tảng, cũng như các sản phẩm và dịch vụ có liên quan của bạn;
+dữ liệu về địa điểm;
+bất kỳ thông tin nào khác về người dùng khi người dùng đăng nhập để sử dụng Các Dịch Vụ hoặc Nền tảng của chúng tôi, và khi người dùng sử dụng Các Dịch Vụ hoặc Nền tảng, cũng như thông tin về việc người dùng sử dụng Các Dịch Vụ hoặc Nền tảng của chúng tôi như thế nào; và
+dữ liệu tổng hợp về nội dung người dùng sử dụng."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" - - - - - - Quay Lại - - - - - - - -"
+                android:textSize="20dp"
+                android:padding="20dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/tv_quay_lai"
+                android:textColor="#E80F0F"/>
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
