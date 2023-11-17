@@ -13,10 +13,14 @@ import android.widget.Toast;
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.ChinhSachBaoMatActivity;
 import com.example.dreamy.UI.Activity.FeedBackActivity;
+
 import com.example.dreamy.UI.Activity.HoTroActivity;
 import com.example.dreamy.UI.Activity.MainActivity;
 import com.example.dreamy.UI.Activity.ProfileActivity;
 import com.example.dreamy.UI.Activity.RepassActivity;
+
+import com.example.dreamy.UI.Activity.LoginActivity;
+
 import com.example.dreamy.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
@@ -48,6 +52,10 @@ public class ProfileFragment extends Fragment {
 
         binding.btnDanhGia.setOnClickListener(view -> {
             startActivity(new Intent(requireActivity(), FeedBackActivity.class));
+        });
+        binding.btnDangXuat.setOnClickListener(view ->{
+            startActivity(new Intent(requireActivity(), LoginActivity.class));
+            
         });
 
         binding.btnDangXuat.setOnClickListener(view -> {
