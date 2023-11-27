@@ -1,16 +1,13 @@
 package com.example.dreamy.UI.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 
 import android.os.Bundle;
 
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Adapter.HistoryAdapter;
+import com.example.dreamy.UI.Adapter.HistoryAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -28,7 +25,7 @@ public class HistoryActivity extends AppCompatActivity {
         mTablayout = findViewById(R.id.tablayout);
 
         mHistoryAdapter = new HistoryAdapter(this);
-        mViewPager.setAdapter(mHistoryAdapter);
+//        mViewPager.setAdapter(mHistoryAdapter);
 
         new TabLayoutMediator(mTablayout, mViewPager, (tab, position) -> {
             switch (position){

@@ -1,12 +1,9 @@
 package com.example.dreamy.UI.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Adapter.ProductAdapter;
-import com.example.dreamy.UI.Activity.Interface.CategoryInterface;
-import com.example.dreamy.UI.Activity.Interface.ProductsInterface;
-import com.example.dreamy.UI.Activity.Interface.RetrofitService;
-import com.example.dreamy.UI.Activity.Model.Category;
-import com.example.dreamy.UI.Activity.Model.Product;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.dreamy.UI.Adapter.ProductAdapter;
+import com.example.dreamy.Interface.ProductsInterface;
+import com.example.dreamy.Interface.RetrofitService;
+import com.example.dreamy.Model.Category;
+import com.example.dreamy.Model.Product;
 
-import java.lang.reflect.Type;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity implements PropertyChangeListener {
 
     ImageView imgback;
     Spinner spin_gia , spin_size  ;
@@ -45,7 +40,7 @@ public class ProductActivity extends AppCompatActivity {
     String[] spin1 ={"Giá giảm","Giá tăng","Dưới 500K","Trên 500K"};
     String[] spin2 ={"XS","S","M","L","XL","XXL"};
     TextView textView ;
-    List<Product> list;
+    List<Product> list=new ArrayList<>();
     ProductAdapter productAdapter;
     RecyclerView recyclerView;
     Category category ;
@@ -65,44 +60,18 @@ public class ProductActivity extends AppCompatActivity {
 
         textView.setText(category.getTen());
         list = new ArrayList<>();
-        Log.d("id_loaisp", "onCreate: "+ category.getId());
+        setAdapter();
+
         back();
         sp();
-        getList();
+
      //   locsp();
 
     }
 
-    private void getList(){
 
-            // api lay du lieu sp theo loai sp o day
-            Retrofit retrofit = RetrofitService.getClient();
-            ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);
-            Call<List<Product>> call = iProductsInterface.getList(category.getId());
-            call.enqueue(new Callback<List<Product>>() {
-                @Override
-                public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                    if (response.isSuccessful()){
-                        list.clear();
-                        list.addAll(response.body());
-                        Log.d("listsp", "onResponse: "+list);
-                        Log.d("listspbody", "onResponse: "+ response.body());
-                        productAdapter = new ProductAdapter(ProductActivity.this, list);
-                        GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
 
-                        recyclerView.setLayoutManager(gridLayoutManager);
-                        recyclerView.setAdapter(productAdapter);
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<List<Product>> call, Throwable t) {
-                    Log.e("RetrofitError", "onFailure: ", t);
-                    Toast.makeText(ProductActivity.this, "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-    }
     private void locsp(){
         btn_loc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,5 +109,20 @@ public class ProductActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        if (propertyChangeEvent.getPropertyName().equals("allProduct")){
+            list=(List<Product>)propertyChangeEvent.getNewValue();
+        }
+    }
+    private void setAdapter(){
+
+        productAdapter = new ProductAdapter(ProductActivity.this, list);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(productAdapter);
+
+    }
 
 }

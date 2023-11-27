@@ -7,33 +7,39 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.dreamy.Manager.ProductManager;
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Fragment.CategoryFragment;
-import com.example.dreamy.UI.Activity.Fragment.ChatboxFragment;
-import com.example.dreamy.UI.Activity.Fragment.HomeFragment;
-import com.example.dreamy.UI.Activity.Fragment.ProfileFragment;
+import com.example.dreamy.UI.Fragment.CategoryFragment;
+import com.example.dreamy.UI.Fragment.ChatboxFragment;
+import com.example.dreamy.UI.Fragment.HomeFragment;
+import com.example.dreamy.UI.Fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView image_cart,img_search;
     EditText ed_search;
     LinearLayout linearLayout;
-
+    ProductManager productManager=ProductManager.getInstance();
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.linearLayout);
-        replaceFragment(new HomeFragment());
+        ed_search = findViewById(R.id.ed_search);
+        image_cart= findViewById(R.id.img_cart);
+        img_search = findViewById(R.id.img_search);
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
+        productManager.getProducts();
+
+        replaceFragment(new HomeFragment());
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id==R.id.home){
@@ -56,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-       ed_search = findViewById(R.id.ed_search);
-        image_cart= findViewById(R.id.img_cart);
-        img_search = findViewById(R.id.img_search);
+
         image_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

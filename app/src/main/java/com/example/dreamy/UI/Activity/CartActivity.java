@@ -1,35 +1,25 @@
 package com.example.dreamy.UI.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.example.dreamy.Database.SQL.AppDatabase;
 import com.example.dreamy.Database.SQL.Dao.ProductDao;
 import com.example.dreamy.Database.SQL.model.Product;
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Adapter.CartAdapter;
-import com.example.dreamy.UI.Activity.Model.Cart;
+import com.example.dreamy.UI.Adapter.CartAdapter;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
