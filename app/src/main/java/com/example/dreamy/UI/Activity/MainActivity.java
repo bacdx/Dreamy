@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Activity.Fragment.CategoryFragment;
 import com.example.dreamy.UI.Activity.Fragment.ChatboxFragment;
+import com.example.dreamy.UI.Activity.Fragment.HistoryFragment;
 import com.example.dreamy.UI.Activity.Fragment.HomeFragment;
 import com.example.dreamy.UI.Activity.Fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new CategoryFragment());
             }
             else if (id==R.id.favorites) {
-                startActivity(new Intent(MainActivity.this, FavortiesActivity.class));
+                replaceFragment(new HistoryFragment());
             }
             else if (id==R.id.chatbox) {
 

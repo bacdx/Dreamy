@@ -2,6 +2,7 @@ package com.example.dreamy.UI.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +17,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +54,9 @@ import retrofit2.Retrofit;
 public class ProductDetailsActivity extends AppCompatActivity {
     public static final int BYLOAI=0;
     public static final int BYNSX=1;
-private TextView title;
+    private TextView title , tvprice , tv_danhgia;
     private ViewPager2 mViewPager2;
-    private ImageView btnAddCart;
+    private ImageView btnAddCart   , img_back;
     private RecyclerView mRecyclerViewColor;
     private RecyclerView mRecyclerViewSize;
     private RecyclerView mRecyclerViewlistProduct;
@@ -89,6 +91,7 @@ private TextView title;
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +106,12 @@ private TextView title;
         mRecyclerViewlistProductByKind=findViewById(R.id.rcv_listsp1);
         btnAddCart=findViewById(R.id.addCart);
         btnAddCart.setOnClickListener(addCardOnClick);
-        title=findViewById(R.id.title);
-//        title.setText(product.set);
+        title=findViewById(R.id.tvName);
+        tvprice=findViewById(R.id.tvPrice);
+        img_back = findViewById(R.id.img_back);
+        tv_danhgia = findViewById(R.id.tvDanhgia);
+        title.setText(product.getTen());
+        tvprice.setText(product.getGia()+"đ");
         //setImg
         setlistImgs();
         //setcolor
@@ -133,9 +140,19 @@ private TextView title;
 
         mRecyclerViewColor.setAdapter(adapterColor);
         mRecyclerViewSize.setAdapter(adapterSize);
+        clickBack();
     }
+    private void clickBack(){
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+    private void danhgia(){
 
-
+    }
 
     public class AdapterImageSlide extends FragmentStateAdapter {
 
@@ -180,6 +197,7 @@ private TextView title;
             public void onResponse(Call<List<ImageProduct>> call, Response<List<ImageProduct>> response) {
                 if (response.isSuccessful()){
                     mPhotoList=response.body();
+                    Log.d("listimg", "onResponse: "+response.body());
                     adapterImageSlide = new AdapterImageSlide(ProductDetailsActivity.this,mPhotoList);
                     mViewPager2.setAdapter(adapterImageSlide);
                 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+    <ImageView
+        android:layout_gravity="center"
+        android:src="@drawable/slide_img1"
+        android:id="@+id/item_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/item_name"
+            android:textSize="20dp"
+            android:fontFamily="@font/font1"
+            android:text="Dazy áo thun nữ bất..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/item_gia"
+            android:textSize="20dp"
+            android:fontFamily="@font/font2"
+            android:text="210.000đ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_muaLai"
+            android:textColor="@color/white"
+            android:fontFamily="@font/font2"
+            android:textSize="17dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_item_don_hang"
+            android:text="Mua lại"
+            android:layout_width="100dp"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+</LinearLayout>

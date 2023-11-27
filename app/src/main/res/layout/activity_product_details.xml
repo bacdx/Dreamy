@@ -36,7 +36,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
+            android:id="@+id/img_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -121,6 +122,19 @@
 
     </LinearLayout>
     <TextView
+        android:padding="2dp"
+        android:gravity="center"
+        android:background="@drawable/bg_danh_gia"
+        android:id="@+id/tvDanhgia"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Xem đánh giá"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/title"
         android:fontFamily="@font/font2"
         android:textStyle="bold"
