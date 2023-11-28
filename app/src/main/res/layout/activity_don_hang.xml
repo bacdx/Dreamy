@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DonHangActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Toolbar
+            android:navigationIcon="@drawable/iconback"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:title="Thanh Toan"></Toolbar>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="24dp"
+            android:singleLine="false"
+            android:text="Địa chỉ nhận hàng \n Trần Xuân Bắc(+84) 359 789 535 \n Ktd dn4 Mỹ Đình 2 \n Phường Mỹ Đình 2 ,Nam Từ Liêm ,Hà Nội"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"></androidx.recyclerview.widget.RecyclerView>
+
+        <TableLayout
+            android:stretchColumns="*"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" >
+            <TableRow>
+        <TextView
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:drawableStart="@drawable/address"
+            android:drawablePadding="10dp"
+            android:text="Chi tiết thanh toán "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+            </TableRow>
+            <TableRow>
+                <TextView
+
+                        android:text="Tổng tiền hàng"/>
+                <TextView
+                    android:id="@+id/tv_tongtienhang"
+                    android:text="đ 1000000"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+
+                    android:text="Tổng Phí Vận Chuyển"/>
+                <TextView
+                    android:id="@+id/tv_phivanchuyen_thanhtoan"
+                    android:text="đ 100000"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Tổng Thanh Toán"/>
+                <TextView
+                    android:id="@+id/tv_tongtien_thanhtoan"
+                    android:text="đ 1000000"/>
+            </TableRow>
+
+
+
+
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

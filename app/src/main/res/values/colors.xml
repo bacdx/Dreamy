@@ -2,5 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="gray">#CECCCC</color>
+
+
     <color name="lavender">#F44336</color>
+    <color name="pink">#E695F4</color>
+
+
 </resources>

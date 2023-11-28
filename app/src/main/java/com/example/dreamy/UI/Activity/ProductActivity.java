@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,13 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dreamy.R;
-import com.example.dreamy.UI.Activity.Adapter.ProductAdapter;
-import com.example.dreamy.UI.Activity.Interface.CategoryInterface;
-import com.example.dreamy.UI.Activity.Interface.ProductsInterface;
-import com.example.dreamy.UI.Activity.Interface.RetrofitService;
-import com.example.dreamy.UI.Activity.Model.Category;
-import com.example.dreamy.UI.Activity.Model.Product;
+import com.example.dreamy.UI.Adapter.ProductAdapter;
+import com.example.dreamy.Interface.ProductsInterface;
+import com.example.dreamy.Interface.RetrofitService;
+import com.example.dreamy.Model.Category;
+import com.example.dreamy.Model.Product;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity implements PropertyChangeListener {
 
     ImageView imgback;
     Spinner spin_gia , spin_size  ;
@@ -40,10 +40,11 @@ public class ProductActivity extends AppCompatActivity {
     String[] spin1 ={"Giá giảm","Giá tăng","Dưới 500K","Trên 500K"};
     String[] spin2 ={"XS","S","M","L","XL","XXL"};
     TextView textView ;
-    List<Product> list;
+    List<Product> list=new ArrayList<>();
     ProductAdapter productAdapter;
     RecyclerView recyclerView;
     Category category ;
+    Product product;
     Button btn_loc ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,50 +57,21 @@ public class ProductActivity extends AppCompatActivity {
         imgback= findViewById(R.id.img_back);
         btn_loc = findViewById(R.id.btn_loc);
         category = (Category) getIntent().getSerializableExtra("Category");
+
         textView.setText(category.getTen());
         list = new ArrayList<>();
-        Log.d("id_loaisp", "onCreate: "+ category.getId());
+        setAdapter();
+
         back();
         sp();
-        getList();
+
      //   locsp();
 
     }
-    static final  String BASE_URL="http://192.168.0.102:3000/api/";
-    private void getList(){
 
-            // api lay du lieu sp theo loai sp o day
-            Retrofit retrofit = RetrofitService.getClient(BASE_URL);
-            ProductsInterface iProductsInterface = retrofit.create(ProductsInterface.class);
-            Call<List<Product>> call = iProductsInterface.getList(category.getId());
-            call.enqueue(new Callback<List<Product>>() {
-                @Override
-                public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                    if (response.isSuccessful()){
-                        list.clear();
-                        list.addAll(response.body());
-                        Log.d("listsp", "onResponse: "+list);
-                        Log.d("listspbody", "onResponse: "+ response.body());
-                        productAdapter = new ProductAdapter(ProductActivity.this, list, new ProductAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(Product product) {
 
-                            }
-                        });
-                        GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
-                        recyclerView.setLayoutManager(gridLayoutManager);
-                        recyclerView.setAdapter(productAdapter);
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<List<Product>> call, Throwable t) {
-                    Log.e("RetrofitError", "onFailure: ", t);
-                    Toast.makeText(ProductActivity.this, "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
 
-    }
     private void locsp(){
         btn_loc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +106,22 @@ public class ProductActivity extends AppCompatActivity {
         ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(spin2));
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this,R.layout.style_spinner,arrayList1);
         spin_size.setAdapter(adapter1);
+
+    }
+
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        if (propertyChangeEvent.getPropertyName().equals("allProduct")){
+            list=(List<Product>)propertyChangeEvent.getNewValue();
+        }
+    }
+    private void setAdapter(){
+
+        productAdapter = new ProductAdapter(ProductActivity.this, list);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(ProductActivity.this,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(productAdapter);
 
     }
 
