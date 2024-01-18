@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:orientation="horizontal">
-
+        
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnBack"
             android:layout_width="38dp"
@@ -21,6 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font2"
@@ -39,7 +40,7 @@
             android:layout_marginEnd="18dp"
             android:fontFamily="@font/font2"
             android:text="Gửi"
-            android:textColor="#ED1C24"
+            android:textColor="#99ED1C24"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +50,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.7dp"
         android:background="@color/black" />
 
     <ScrollView
@@ -64,13 +65,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
+                android:paddingVertical="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginRight="10dp"
                     android:id="@+id/img_feedback"
-                    android:layout_width="95dp"
-                    android:layout_height="71dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ao1" />
 
                 <LinearLayout
@@ -90,15 +93,6 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/tv_phanloai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Phân loại: "
-                        android:textColor="#6E6F72"
-                        android:textSize="12sp"
-
-                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -156,31 +150,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editTextCamera"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/red_border"
-                    android:drawableLeft="@drawable/camera"
-                    android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
-                    android:text="Thêm hình ảnh"
-                    android:textColor="#ED1C24" />
 
-                <EditText
-                    android:id="@+id/editTextVideo"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/red_border"
-                    android:drawableLeft="@drawable/video"
-                    android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
-                    android:text="Thêm video"
-                    android:textColor="#ED1C24" />
             </LinearLayout>
 
             <LinearLayout
@@ -192,53 +162,12 @@
                 android:orientation="vertical"
                 android:padding="6dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_chatlieu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/font2"
-                        android:text="Chất liệu: "
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/edt_danh_gia"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginHorizontal="4dp"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/font2"
-                        android:hint="để lại đánh giá"
-                        android:textColor="#C4C4C4"
-                        android:textSize="11sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tv_chatlieu"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_mota"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/font2"
-                        android:text="Đúng với mô tả: "
-                        android:textColor="@color/black"
-                        android:textSize="11sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/edt_mota"
@@ -251,7 +180,6 @@
                         android:textColor="#C4C4C4"
                         android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tv_mota"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -265,7 +193,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/font2"
-                        android:text="Chất lượng sản phẩm: "
+                        android:text="Đánh giá: "
                         android:textColor="@color/black"
                         android:textSize="11sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -293,9 +221,10 @@
                     android:background="#C4C4C4" />
 
                 <EditText
+                    android:gravity="center_horizontal"
                     android:id="@+id/material"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/font2"
                     android:hint="Hãy chia sẻ để góp phần cải thiện sản phẩm"
@@ -304,135 +233,135 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="5dp"
-                android:text="Kích thước"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="12dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:text="Kích thước"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="13sp" />-->
 
-            <RadioGroup
-                android:id="@+id/size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="horizontal">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/size"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="12dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radio_chuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:buttonTint="@color/white"
-                    android:text="Chuẩn" />
+<!--                <androidx.appcompat.widget.AppCompatRadioButton-->
+<!--                    android:id="@+id/radio_chuan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:buttonTint="@color/black"-->
+<!--                    android:checked="true"-->
+<!--                    android:text="Chuẩn" />-->
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radio_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="34dp"
-                    android:buttonTint="@color/black"
-                    android:text="Chật" />
+<!--                <androidx.appcompat.widget.AppCompatRadioButton-->
+<!--                    android:id="@+id/radio_chat"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="34dp"-->
+<!--                    android:buttonTint="@color/black"-->
+<!--                    android:text="Chật" />-->
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radio_rong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/black"
-                    android:text="Rộng" />
-            </RadioGroup>
+<!--                <androidx.appcompat.widget.AppCompatRadioButton-->
+<!--                    android:id="@+id/radio_rong"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:buttonTint="@color/black"-->
+<!--                    android:text="Rộng" />-->
+<!--            </RadioGroup>-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:layout_marginHorizontal="12dp"
-                android:orientation="horizontal">
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?actionBarSize"-->
+<!--                android:layout_marginHorizontal="12dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:id="@+id/tv_nguoiban"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/font2"
-                    android:gravity="center"
-                    android:text="Dịch vụ người \nbán"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_nguoiban"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/font2"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Dịch vụ người \nbán"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-                <RatingBar
-                    android:id="@+id/ratingBar_nguoiban"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    android:theme="@style/RatingBar"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <RatingBar-->
+<!--                    android:id="@+id/ratingBar_nguoiban"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:scaleX=".5"-->
+<!--                    android:scaleY=".5"-->
+<!--                    android:theme="@style/RatingBar"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <TextView
-                    android:id="@+id/ratingLabel_nguoiban"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/font2"
-                    android:text="Tuyệt vời"
-                    android:textColor="#FFA500"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/ratingLabel_nguoiban"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/font2"-->
+<!--                    android:text="Tuyệt vời"-->
+<!--                    android:textColor="#FFA500"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:layout_marginHorizontal="12dp"
-                android:orientation="horizontal">
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?actionBarSize"-->
+<!--                android:layout_marginHorizontal="12dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:id="@+id/tv_ship"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/font2"
-                    android:gravity="center"
-                    android:text="Dịch vụ vận \nchuyển"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_ship"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/font2"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Dịch vụ vận \nchuyển"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintHorizontal_weight="1"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <RatingBar
-                    android:id="@+id/ratingBar_ship"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    android:theme="@style/RatingBar"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <RatingBar-->
+<!--                    android:id="@+id/ratingBar_ship"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:scaleX=".5"-->
+<!--                    android:scaleY=".5"-->
+<!--                    android:theme="@style/RatingBar"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <TextView
-                    android:id="@+id/ratingLabel1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/font2"
-                    android:text="Tuyệt vời"
-                    android:textColor="#FFA500"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/ratingLabel1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/font2"-->
+<!--                    android:text="Tuyệt vời"-->
+<!--                    android:textColor="#FFA500"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

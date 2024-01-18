@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +31,7 @@ public class HttpProvider {
                     .build();
 
             OkHttpClient client = new OkHttpClient.Builder()
-                    .connectionSpecs(Collections.singletonList(spec))
+                    .connectionSpecs(Arrays.asList(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
                     .callTimeout(5000, TimeUnit.MILLISECONDS)
                     .build();
 

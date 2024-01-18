@@ -25,7 +25,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bg_banner"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -33,7 +33,7 @@
                         android:id="@+id/view_pager2"
                         android:layout_width="match_parent"
                         android:layout_height="416dp"
-                        android:layout_marginTop="60dp"
+
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="12dp" />
 
@@ -47,6 +47,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -56,30 +57,38 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginEnd="12dp"
-                        android:src="@drawable/icon_shopping_cart"
-                        android:tint="#F77797"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/fav"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginEnd="12dp"
                         android:layout_marginBottom="4dp"
-                        android:src="@drawable/icon_heart_outline"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="200dp"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:alpha="1"
+                        android:background="@color/red"
+                        android:gravity="center"
+                        android:rotation="45"
+                        android:text="-50%"
+                        android:textColor="@color/white"
+                        android:translationX="70dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:paddingHorizontal="5dp"
                     android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/layoutBanner">
@@ -90,14 +99,37 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font1"
                         android:text="Collar Solid Pocket BlazerBlazer"
-                        android:textSize="12sp" />
+                        android:textSize="20sp" />
+                   <LinearLayout
+                       android:orientation="horizontal"
 
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+                       <RatingBar
+                           android:progressBackgroundTint="@color/vang"
+                           android:id="@+id/rb"
+                           android:layout_width="200dp"
+                           android:layout_height="50dp"
+                           android:layout_marginRight="100dp"
+                           android:numStars="4"
+                           android:isIndicator="true"></RatingBar>
+                       <androidx.appcompat.widget.AppCompatImageView
+                           android:id="@+id/img_cart_productDetal"
+                           android:layout_width="32dp"
+                           android:layout_height="32dp"
+                           android:layout_marginTop="7dp"
+                           android:src="@drawable/cart1"
+                           android:tint="#F77797"
+
+                           />
+                   </LinearLayout>
                     <TextView
+                        android:textColor="@color/red"
                         android:id="@+id/tvPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="12dp"
-                        android:fontFamily="@font/font2"
+                        android:fontFamily="@font/font1"
                         android:text="816,454đ"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -130,41 +162,79 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+                <TextView
 
+                    android:id="@+id/tvTitleComment_productActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/font2"
+                    android:text="Comment"
+                    android:textSize="23dp"
+
+                    android:textStyle="bold" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvComment_productActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/gray"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_comment">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/font2"
                     android:text="Sản Phẩm cùng hãng"
                     android:textSize="23dp"
                     android:textStyle="bold" />
+            </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_listsp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/gray"
                     android:orientation="vertical">
 
                 </androidx.recyclerview.widget.RecyclerView>
-
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
                 <TextView
                     android:id="@+id/title2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/font2"
                     android:text="Sản Phẩm cùng loại"
                     android:textSize="23dp"
                     android:textStyle="bold" />
+            </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="70dp"
+                    android:background="@color/gray"
                     android:id="@+id/rcv_listsp1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
@@ -178,26 +248,15 @@
             <androidx.appcompat.widget.AppCompatButton
 
                 android:id="@+id/btnMua"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/bg_btn"
-
+                android:layout_marginBottom="2dp"
                 android:minWidth="250dp"
                 android:text="MUA HÀNG"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/addCart"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_btn_rd_r"
-                android:src="@drawable/baseline_shopping_cart_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnMua"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

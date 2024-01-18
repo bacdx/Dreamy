@@ -2,6 +2,7 @@ package com.example.dreamy.UI.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,11 @@ private  SizeOnClickItem sizeOnClickItem;
         return new ViewHolder(view);
     }
 
+    public void setSizes(ArrayList<Size> sizes) {
+        this.sizes = sizes;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull SmallIitemSize.ViewHolder holder, int position) {
@@ -53,6 +59,8 @@ private  SizeOnClickItem sizeOnClickItem;
 
     }
     public  Size getItemSelect(){
+        Log.i("size",String.valueOf(selectPosition));
+
         if (selectPosition!=-1){
         return  sizes.get(selectPosition);
         }else return null;

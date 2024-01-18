@@ -20,6 +20,26 @@ public class Color implements Parcelable {
         this.img = img;
     }
 
+    protected Color(Parcel in) {
+        id = in.readString();
+        masp = in.readString();
+        title = in.readString();
+        mamau = in.readString();
+        img = in.readString();
+    }
+
+    public static final Creator<Color> CREATOR = new Creator<Color>() {
+        @Override
+        public Color createFromParcel(Parcel in) {
+            return new Color(in);
+        }
+
+        @Override
+        public Color[] newArray(int size) {
+            return new Color[size];
+        }
+    };
+
     public String getId() {
         return id;
     }
@@ -67,6 +87,10 @@ public class Color implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-
+        parcel.writeString(id);
+        parcel.writeString(masp);
+        parcel.writeString(title);
+        parcel.writeString(mamau);
+        parcel.writeString(img);
     }
 }

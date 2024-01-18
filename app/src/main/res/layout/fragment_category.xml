@@ -4,16 +4,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#d5d1d2"
     tools:context=".UI.Fragment.CategoryFragment">
+
     <TextView
         android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="5dp"
         android:background="#ECD894"
         android:gravity="center"
-        android:text="Points earned on every day order to redeem free gifts !"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="35dp"/>
+        android:text="Điểm kiếm được mỗi ngày để đổi quà tặng miễn phí!" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_gravity="center_horizontal"

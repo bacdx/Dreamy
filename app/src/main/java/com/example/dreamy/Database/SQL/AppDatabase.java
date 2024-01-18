@@ -1,11 +1,43 @@
 package com.example.dreamy.Database.SQL;
 
-import androidx.room.RoomDatabase;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.dreamy.Database.SQL.Dao.ProductDao;
-import com.example.dreamy.Database.SQL.model.Product;
+import androidx.annotation.Nullable;
 
-@androidx.room.Database(entities ={Product.class},version =1 )
- public  abstract class AppDatabase extends RoomDatabase {
-    public abstract ProductDao productDao();
-}
+
+public   class AppDatabase extends SQLiteOpenHelper {
+     public static final String DATABASE_NAME="favorite";
+     public static final String CREATE_TABLE_CART="create table cart" +
+             "( id  integer not null primary key autoincrement," +
+            " masp integer not null,"+
+            " mactsp integer not null,"+
+            " masize integer not null,"+
+            " macolor integer not null,"+
+            " soluong integer not null);";
+     public static final String CREATE_TABLE_FAVORITE="create table favorite" +
+             "( id  integer not null primary key autoincrement," +
+             "masp integer not null)";
+     private static final String SQL_DELETE_ENTRIES =
+             "DROP TABLE IF EXISTS " +DATABASE_NAME;
+     public AppDatabase(@Nullable Context context) {
+         super(context, DATABASE_NAME, null,2);
+     }
+
+     @Override
+     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+            sqLiteDatabase.execSQL(CREATE_TABLE_FAVORITE);
+            sqLiteDatabase.execSQL(CREATE_TABLE_CART);
+     }
+
+     @Override
+     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+         sqLiteDatabase.execSQL("drop table if exists favorite");
+         sqLiteDatabase.execSQL("drop table if exists cart");
+        sqLiteDatabase.execSQL(SQL_DELETE_ENTRIES);
+
+         onCreate(sqLiteDatabase);
+
+     }
+ }

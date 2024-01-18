@@ -47,17 +47,17 @@ public class SanPhamHoaDonAdapter extends RecyclerView.Adapter<SanPhamHoaDonAdap
 //        holder.binding.tvSize.setText(obj.size);
 //        holder.binding.tvSoLuong.setText("x"+obj.much);
 
-        if (status.equals(OrderStatus.CHO_VAN_CHUYEN)){
-            holder.binding.btnLienHe.setText("Liên Hệ Shop");
-        } else if (status.equals(OrderStatus.DANG_GIAO)) {
-            holder.binding.btnLienHe.setText("Đã Nhận Được Hàng");
-        }else{
-            holder.binding.btnLienHe.setText("Mua Lại");
-        }
-
-        holder.binding.btnLienHe.setOnClickListener(view -> {
-            callBack.onBtnClick();
-        });
+//        if (status.equals(OrderStatus.CHO_VAN_CHUYEN)){
+//            holder.binding.btnLienHe.setText("Liên Hệ Shop");
+//        } else if (status.equals(OrderStatus.DANG_GIAO)) {
+//            holder.binding.btnLienHe.setText("Đã Nhận Được Hàng");
+//        }else{
+//            holder.binding.btnLienHe.setText("Mua Lại");
+//        }
+//
+//        holder.binding.btnLienHe.setOnClickListener(view -> {
+//            callBack.onBtnClick();
+//        });
     }
 
     @Override
@@ -66,11 +66,11 @@ public class SanPhamHoaDonAdapter extends RecyclerView.Adapter<SanPhamHoaDonAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemSanPhamDonHangBinding binding;
+
 
         public ViewHolder(ItemSanPhamDonHangBinding binding) {
             super(binding.getRoot());
-            this.binding = binding;
+
         }
     }
 }

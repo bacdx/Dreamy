@@ -2,6 +2,7 @@ package com.example.dreamy.Manager;
 
 import com.example.dreamy.CreateOrder;
 import com.example.dreamy.Model.OderDetal;
+import com.example.dreamy.Model.User;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -9,16 +10,17 @@ import org.json.JSONObject;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observer;
 
 public class PayController   {
+    private ProfileManager profileManager=ProfileManager.getInstant();
 
-    private OderDetal oderDetal;
-    private String amount;
+    private String mAmount;
 
     private CreateOrder createOrder;
 
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private  PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private static PayController instance;
 
@@ -36,20 +38,33 @@ public class PayController   {
         return instance;
     }
 
-    public void Pay(String amount, OderDetal oderDetal) throws Exception {
-        this.amount=amount;
-        this.oderDetal = oderDetal;
-         ArrayList<OderDetal> list=new ArrayList<>();
-         list.add(oderDetal);
+    public void Pay(List<OderDetal> list ,String DiaChi,String PhuongThuc) throws Exception {
+        long amount =0;
+        for (int i=0; i<list.size();i++){
+            amount+=list.get(i).getDonGia();
+        }
+        mAmount=Long.toString(amount);
+
+
+
 
         String jsonArray= new Gson().toJson(list);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                   JSONObject order= createOrder.createOrder(amount,jsonArray);
-                   pcs.firePropertyChange("Pay",null,order);
+                    User user=profileManager.getMyAccount();
+                   JSONObject order= createOrder.createOrder(user.getId(),mAmount,jsonArray, DiaChi,PhuongThuc);
 
+                    String code = order.getString("return_code");
+                    if (code.equals("1")) {
+                        String token =order.getString("zp_trans_token");
+                        String id =order.getString("id");
+                        pcs.firePropertyChange("Pay",null,new String []{token,id});
+                    }else if(code.equals("2")){
+                        pcs.firePropertyChange("Pay",null,new String("error"));
+
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -65,5 +80,6 @@ public class PayController   {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         this.pcs.removePropertyChangeListener(listener);
     }
+
 
 }

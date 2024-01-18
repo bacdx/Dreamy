@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="preference_file_key">idsProduct\n</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoiYmFjdHhwaDIwMjM0IiwiYSI6ImNscGh1cWlncDBkMXoya21heWFpNGt2eDIifQ.gcGJYfsCPZkDQM3IHAoQvw</string>
+
 </resources>

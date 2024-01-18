@@ -1,9 +1,6 @@
-package com.example.dreamy.Interface;
+package com.example.dreamy.InterfaceRetrofit;
 
-import com.example.dreamy.Model.Color;
 import com.example.dreamy.Model.Order;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

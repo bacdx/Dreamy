@@ -1,5 +1,6 @@
 package com.example.dreamy;
 
+import com.example.dreamy.Helper.AppInfo;
 import com.example.dreamy.Helper.Helpers;
 import com.example.dreamy.Helper.HttpProvider;
 import com.google.gson.Gson;
@@ -25,17 +26,21 @@ public class CreateOrder {
         String BankCode;
         String Description;
         String Mac;
+        String DiaChi;
+        String PhuongThuc;
 
-        private CreateOrderData(String amount,String item  ) throws Exception {
+        private CreateOrderData(String appUser,String amount,String item ,String DiaChi ,String PhuongThuc) throws Exception {
             long appTime = new Date().getTime();
-            AppId = String.valueOf(MyApplication.APP_ID);
-            AppUser = "Android_Demo";
+            AppId = String.valueOf(AppInfo.APP_ID);
+            AppUser = appUser;
             AppTime = String.valueOf(appTime);
             Amount = amount;
             AppTransId = Helpers.getAppTransId();
             EmbedData = "{}";
-
+            Items = item;
             BankCode = "zalopayapp";
+            this.DiaChi=DiaChi;
+            this.PhuongThuc=PhuongThuc;
             Description = "Merchant pay for order #" + Helpers.getAppTransId();
             String inputHMac = String.format("%s|%s|%s|%s|%s|%s|%s",
                     this.AppId,
@@ -46,14 +51,14 @@ public class CreateOrder {
                     this.EmbedData,
                     this.Items);
 
-            Mac = Helpers.getMac(MyApplication.MAC_KEY, inputHMac);
+            Mac = Helpers.getMac(AppInfo.MAC_KEY, inputHMac);
         }
 
 
     }
 
-     public JSONObject createOrder(String amount,String item) throws Exception {
-        CreateOrderData input = new CreateOrderData(amount,item);
+     public JSONObject createOrder(String appUser,String amount,String item,String DiaChi,String PhuongThuc) throws Exception {
+        CreateOrderData input = new CreateOrderData(appUser,amount,item,DiaChi,PhuongThuc);
 
         RequestBody formBody = new FormBody.Builder()
                 .add("app_id", input.AppId)
@@ -66,9 +71,13 @@ public class CreateOrder {
                 .add("bank_code", input.BankCode)
                 .add("description", input.Description)
                 .add("mac", input.Mac)
+                .add("address", input.DiaChi)
+                .add("phuongthuc", input.PhuongThuc)
                 .build();
 
-        JSONObject data = HttpProvider.sendPost(MyApplication.URL_CREATE_ORDER, formBody);
+
+
+        JSONObject data = HttpProvider.sendPost(AppInfo.URL_CREATE_ORDER, formBody);
         return data;
     }
 }

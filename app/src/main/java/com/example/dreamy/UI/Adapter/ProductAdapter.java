@@ -12,25 +12,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamy.Model.Color;
+import com.example.dreamy.Model.ProductTop;
 import com.example.dreamy.ProductController;
 import com.example.dreamy.R;
 import com.example.dreamy.Model.Product;
 import com.example.dreamy.UI.Activity.ProductDetailsActivity;
+import com.google.android.play.core.integrity.p;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
     private Context context;
-    private List<Product> list= new ArrayList<>();
+    private ArrayList<Product> list;
 
     private ProductController productController=new ProductController();
-   public void updateData(ArrayList<Product> newProducts){
+
+
+    public void updateData(ArrayList<Product> newProducts){
             this.list = newProducts;
             notifyDataSetChanged();
     }
-    public ProductAdapter(Context context, List<Product> list) {
+    public ProductAdapter(Context context, ArrayList<Product> list) {
         this.context = context;
         this.list = list;
 
@@ -52,12 +57,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             }
             holder.item_name.setText(product.getTen());
             holder.item_gia.setText(product.getGia()+"đ");
+            if (product.getImg()==null){
+                Picasso.get().load(Product.IMGDEFAUSE).into(holder.item_img);
+            }
         Picasso.get().load(product.getImg()).into(holder.item_img);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, ProductDetailsActivity.class);
-                intent.putExtra("Product",product);
+                intent.putExtra("Product",(Serializable) product);
                 context.startActivity(intent);
             }
         });

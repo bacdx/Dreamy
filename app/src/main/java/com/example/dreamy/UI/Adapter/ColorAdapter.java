@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dreamy.Model.Color;
 import com.example.dreamy.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ViewHolder>{
 
-        List<Color> colors;
+        List<Color> colors=new ArrayList<>();
         private ColorAdapter.OnClickListener onClickListener;
         private  int pos=-1;
 

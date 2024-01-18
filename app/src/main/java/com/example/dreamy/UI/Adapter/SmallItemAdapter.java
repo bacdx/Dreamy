@@ -3,6 +3,7 @@ package com.example.dreamy.UI.Adapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,11 @@ import java.util.ArrayList;
 
 public class SmallItemAdapter extends RecyclerView.Adapter<SmallItemAdapter.ViewHolder> {
     private IOnClick iOnClick;
+
+    public int getSelectPosition() {
+        return selectPosition;
+    }
+
     private int selectPosition=-1;
     private int lastSelectPosition=-1;
 
@@ -66,12 +72,20 @@ public class SmallItemAdapter extends RecyclerView.Adapter<SmallItemAdapter.View
         });
     }
 
+    public void setColors(ArrayList<Color> colors) {
+        this.colors = colors;
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public int getItemCount() {
         return colors.size();
     }
 
     public Color getItemSelect(){
+        Log.i("color",String.valueOf(selectPosition));
+
         if(selectPosition==-1){
             return null;
         }

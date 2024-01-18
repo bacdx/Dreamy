@@ -1,5 +1,6 @@
 package com.example.dreamy.UI.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,19 +10,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.example.dreamy.Manager.ProductManager;
-import com.example.dreamy.ProductController;
+import com.example.dreamy.Model.Category;
 import com.example.dreamy.R;
+import com.example.dreamy.UI.Activity.ProductActivity;
 import com.example.dreamy.UI.Adapter.ProductAdapter;
 import com.example.dreamy.UI.Adapter.SlideHomeAdapter;
-import com.example.dreamy.Interface.ProductsInterface;
-import com.example.dreamy.Interface.RetrofitService;
 import com.example.dreamy.Model.PhotoSlide;
 import com.example.dreamy.Model.Product;
 
@@ -31,14 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
 
 import me.relex.circleindicator.CircleIndicator;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class HomeFragment extends Fragment implements PropertyChangeListener {
@@ -50,10 +43,11 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
     private SlideHomeAdapter slideHomeAdapter ;
     private List<PhotoSlide> photoList ;
     private Timer timer;
+    private ImageView imageView2,imageView;
 
     private ProductManager productManager=ProductManager.getInstance();
     RecyclerView rcv_home ;
-    List<Product> list=new ArrayList<>();
+    ArrayList<Product> list=new ArrayList<>();
     ProductAdapter productAdapter;
 
 
@@ -68,6 +62,8 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         productManager.addListener(this);
+        productManager.getRandomList("0");
+        productAdapter = new ProductAdapter(getContext(), list);
     }
 
     @Override
@@ -76,6 +72,26 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_home, container, false);
         vpr = (ViewPager) view.findViewById(R.id.vpr);
+        imageView2=view.findViewById(R.id.flag2);
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Category category=new Category("1","Quần áo nam","","");
+                Intent intent=new Intent(getContext(), ProductActivity.class);
+                intent.putExtra("Category",category);
+                getActivity().startActivity(intent);
+            }
+        });
+        imageView=view.findViewById(R.id.flag);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Category category=new Category("2","Quần áo nữ","","");
+                Intent intent=new Intent(getContext(), ProductActivity.class);
+                intent.putExtra("Category",category);
+                getActivity().startActivity(intent);
+            }
+        });
         rcv_home = view.findViewById(R.id.rcv_random);
         circleIndicator = (CircleIndicator) view.findViewById(R.id.circle_indicator);
         photoList = getListPhoto();
@@ -87,6 +103,7 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
         setRecyclerView();
         return  view ;
     }
+
 
 
     private List<PhotoSlide> getListPhoto() {
@@ -128,8 +145,6 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
 
 
     private void setRecyclerView(){
-        list.clear();
-        productAdapter = new ProductAdapter(getContext(), list);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         rcv_home.setLayoutManager(gridLayoutManager);
         rcv_home.setAdapter(productAdapter);
@@ -141,8 +156,14 @@ public class HomeFragment extends Fragment implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         if (propertyChangeEvent.getPropertyName().equals("allProduct")){
             if (propertyChangeEvent.getNewValue()!=null){
-                list=(List<Product>) propertyChangeEvent.getNewValue();
-                productAdapter.updateData((ArrayList<Product>) list);
+                list= (ArrayList<Product>) propertyChangeEvent.getNewValue();
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        productAdapter.updateData((ArrayList<Product>) list);
+                    }
+                });
             }
         }
 

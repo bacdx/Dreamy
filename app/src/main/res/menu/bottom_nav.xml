@@ -12,10 +12,10 @@
         android:title="Favorites"
         android:iconTint="#F77797"
         android:icon="@drawable/icon_heart"/>
-    <item android:id="@+id/chatbox"
-        android:title="Chat"
-        android:iconTint="#F77797"
-        android:icon="@drawable/icon_chat"/>
+<!--    <item android:id="@+id/chatbox"-->
+<!--        android:title="Chat"-->
+<!--        android:iconTint="#F77797"-->
+<!--        android:icon="@drawable/icon_chat"/>-->
     <item android:id="@+id/profile"
         android:title="Profile"
         android:iconTint="#F77797"

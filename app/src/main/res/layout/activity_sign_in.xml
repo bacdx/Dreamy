@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/colorkit_pink"
+    android:gravity="center_horizontal"
+    tools:context=".LoginActivity">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Đăng Kí"
+        android:textColor="@color/blue"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <com.google.android.material.textfield.TextInputEditText style="@style/TextInputCustom"
+        android:text="bac"
+        android:minEms="1"
+        android:textCursorDrawable="@color/pink"
+        android:drawableTint="@color/blue"
+        android:drawablePadding="20dp"
+        android:textSize="16dp"
+        android:hint="Full name"
+        android:paddingStart="20dp"
+        android:drawableStart="@drawable/person_pink"
+        android:background="@drawable/background_inputtext"
+        android:id="@+id/ed_username_sigin"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="50dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ed_email_sigin"
+        android:text="bac@gmail.com"
+        android:drawableTint="@color/blue"
+        android:background="@drawable/background_inputtext"
+        android:layout_marginTop="30dp"
+        android:textCursorDrawable="@color/pink"
+        android:drawablePadding="20dp"
+        android:textSize="16dp"
+        android:hint="Email"
+        android:paddingStart="20dp"
+        android:inputType="textEmailAddress"
+        android:drawableStart="@drawable/lock_pink"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+    <com.google.android.material.textfield.TextInputEditText
+        android:text="123"
+        android:id="@+id/ed_passsword_sigin"
+        android:drawableTint="@color/blue"
+        android:background="@drawable/background_inputtext"
+        android:layout_marginTop="30dp"
+        android:textCursorDrawable="@color/pink"
+        android:drawablePadding="20dp"
+        android:textSize="16dp"
+        android:hint="Password"
+        android:paddingStart="20dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/lock_pink"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ed_repasssword_sigin"
+        android:text="123"
+        android:drawableTint="@color/blue"
+        android:background="@drawable/background_inputtext"
+        android:layout_marginTop="30dp"
+        android:textCursorDrawable="@color/pink"
+        android:drawablePadding="20dp"
+        android:textSize="16dp"
+        android:hint="Confirm Password"
+        android:paddingStart="20dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/lock_pink"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:paddingStart="40dp"
+        android:textColor="@color/red"
+        android:id="@+id/tv_checkerr_signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signin_signin"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="57dp"
+        android:textColor="@color/white"
+        android:text="Đăng Ki "
+        android:backgroundTint="@color/blue"
+        android:background="@drawable/buton_defau"></androidx.appcompat.widget.AppCompatButton>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bạn đã có tài khoản ?"></TextView>
+    <TextView
+        android:id="@+id/tv_login_signin"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"></TextView>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.dreamy.Interface;
+package com.example.dreamy.InterfaceRetrofit;
 
 import com.example.dreamy.Model.ImageProduct;
 

@@ -3,16 +3,19 @@ package com.example.dreamy.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Category implements Serializable {
 
     private String id ;
     private String ten ;
     private String img ;
-    private String note ;
+    private String note;
+    private ArrayList<Product> list;
 
     public Category() {
     }
+
 
     public Category(String id, String ten, String img, String note) {
         this.id = id;
@@ -51,5 +54,13 @@ public class Category implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public ArrayList<Product> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Product> list) {
+        this.list = list;
     }
 }

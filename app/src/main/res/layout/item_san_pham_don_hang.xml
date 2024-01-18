@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_donhang"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/imgSp"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -21,12 +25,13 @@
 
         <TextView
             android:id="@+id/tvTenSp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font1"
             android:text="DAZY áp thun nữ bất đối xứng Cắt ra"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -38,10 +43,26 @@
             android:textColor="#4F4F4F"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTenSp" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/tvSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_size"
+            android:backgroundTint="#E3DFDF"
+            android:fontFamily="@font/font2"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:text="M"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_size"
@@ -51,20 +72,62 @@
             android:paddingVertical="6dp"
             android:text="M"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSoLuong" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSoLuong"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/btnLienHe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn_item_don_hang"
-            android:paddingHorizontal="26dp"
-            android:paddingVertical="6dp"
-            android:text="Liên hệ Shop"
-            android:textColor="@color/white"
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_huy_itemSpDonHang"
+            android:layout_width="86dp"
+            android:layout_height="51dp"
+            android:backgroundTint="@color/red"
+            android:text="Hủy"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_DanhGia_itemSpDonHang"
+            android:layout_width="86dp"
+            android:layout_height="51dp"
+            android:backgroundTint="@color/vang"
+            android:text="Danh Gia"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/ProBag"
+            android:layout_width="86dp"
+            android:layout_height="51dp"
+            android:backgroundTint="@color/vang"
+            android:text="Danh Gia"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <!--        <TextView-->
+        <!--            -->
+        <!--            android:id="@+id/tvPrice"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+
+        <!--            android:layout_marginTop="28dp"-->
+        <!--            android:layout_marginEnd="48dp"-->
+        <!--            android:backgroundTint="#E3DFDF"-->
+        <!--            android:fontFamily="@font/font2"-->
+        <!--            android:paddingHorizontal="16dp"-->
+        <!--            android:paddingVertical="6dp"-->
+        <!--            android:text="10000 VND"-->
+        <!--            android:textSize="12sp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -1,81 +1,138 @@
 package com.example.dreamy.UI.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.dreamy.Model.CategoryPhake;
-import com.example.dreamy.databinding.FragmentChoLayHangBinding;
+import com.example.dreamy.InterfaceRetrofit.ItemBillOnClick;
+import com.example.dreamy.Manager.BillManager;
+import com.example.dreamy.Model.Bill;
+import com.example.dreamy.R;
+import com.example.dreamy.UI.Adapter.HoaDonAdapter;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.prefs.PreferenceChangeListener;
 
 
-public class ChoLayHangFragment extends Fragment {
+public class ChoLayHangFragment extends Fragment implements PropertyChangeListener {
 
-    FragmentChoLayHangBinding  binding;
+ItemBillOnClick itemBillOnClick ;
+    private Button button;
+    private String trangThai;
+    private TextView tvTrangThai;
+    private ImageView icTrangThai;
+    private ArrayList<Bill> list=new ArrayList<>();
+    private RecyclerView recyclerView;
+    private HoaDonAdapter hoaDonAdapter;
+    private BillManager billManager;
+
 
     public ChoLayHangFragment() {
         // Required empty public constructor
     }
-    public static ChoLayHangFragment newInstance(String param1, String param2) {
-        ChoLayHangFragment fragment = new ChoLayHangFragment();
-        return fragment;
+    public void addItemBillOnClick(ItemBillOnClick itemBillOnClick){
+        this.itemBillOnClick=itemBillOnClick;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        billManager=BillManager.getInstant();
+        billManager.resigListener(this);
+
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentChoLayHangBinding.inflate(getLayoutInflater());
-//
-//        HoaDonAdapter adapter = new HoaDonAdapter(getContext(),getOrders(), () ->{
-//            Toast.makeText(requireContext(), "Do Something", Toast.LENGTH_SHORT).show();
-////        });
-//        binding.rcvDonHang.setAdapter(adapter);
-
-        return binding.getRoot();
+    public void onDestroy() {
+        super.onDestroy();
+        billManager.unResigListener(this);
     }
 
-//    private List<Order> getOrders(){
-//        List<Order> lists = new ArrayList<>();
-//        lists.add(new Order("","VN-2145",OrderStatus.CHO_VAN_CHUYEN,getRandom()));
-//        lists.add(new Order("","VN-6585",OrderStatus.CHO_VAN_CHUYEN,getRandom()));
-//        lists.add(new Order("","VN-5984",OrderStatus.CHO_VAN_CHUYEN,getRandom()));
-//        return lists;
-//    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_cho_lay_hang,container,false);
+        Log.i("L","onCreateView");
+        tvTrangThai=view.findViewById(R.id.tvTrangThai);
+        icTrangThai=view.findViewById(R.id.icTrangThai);
+        recyclerView=view.findViewById(R.id.rcv_don_hang);
 
-//    private List<CategoryPhake> getRandom(){
-//        List<CategoryPhake> lists = new ArrayList<>();
-//        List<CategoryPhake> defaulList = getCategoryPhakes();
-//        Random random = new Random();
-//
-//        for (int i = 0; i < 3; i++) {
-//            int position = random.nextInt(defaulList.size() - 1);
-//            lists.add(defaulList.get(position));
-//            defaulList.remove(position);
-//        }
-//
-//        return lists;
-//    }
 
-//    private List<CategoryPhake> getCategoryPhakes(){
-//        List<CategoryPhake> lists = new ArrayList<>();
-//        lists.add(new CategoryPhake("","Váy tím đính viền ngọc cổ vuông","","","S","","1", "","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-tim-dinh-vien-ngoc-co-vuong-v3973-600x600.jpg"));
-//        lists.add(new CategoryPhake("","Váy hoa nhí tay cánh tiên","","","M","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-hoa-nhi-tay-canh-tien-v3983-600x600.jpg"));
-//        lists.add(new CategoryPhake("","Váy đen công sở cổ v dáng xòe sang trọng","","","L","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-den-cong-so-co-v-dang-xoe-sang-trong-v3980-600x600.jpg"));
-//        lists.add(new CategoryPhake("","Váy xanh đai eo cổ vuông sang trọng","","","M","","2","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-xanh-dai-eo-co-vuong-sang-trong-v4076-1-600x600.jpg"));
-//        lists.add(new CategoryPhake("","Váy đen xòe cổ V tay bèo","","","M","","2","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-den-xoe-co-v-tay-beo-v4011-600x600.jpg"));
-//        lists.add(new CategoryPhake("","Váy kẻ đen trắng cổ sơ mi dáng dài","","","L","","1","","https://thoitrangtadi.com/wp-content/uploads/2023/08/vay-ke-den-trang-co-so-mi-dang-dai-v4018-600x600.jpg"));
-//        return lists;
-//    }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        hoaDonAdapter=new HoaDonAdapter(getContext(),list,itemBillOnClick,trangThai);
+        recyclerView.setAdapter(hoaDonAdapter);
+        setLayout();
+        return view ;
+    }
+
+    public void setLayout(){
+
+        if(trangThai.equals(Bill.DANG_CHO_XAC_NHAN)){
+            list=billManager.getBillsChoXacNhan();
+            tvTrangThai.setText("Cho xac nhan");
+            tvTrangThai.setTextColor(Color.parseColor("#AF393D"));
+            icTrangThai.setImageResource(R.drawable.ic_trang_thai);
+
+        }else if (trangThai.equals(Bill.DA_XAC_NHAN)){
+            list=billManager.getBillsXacNhan();
+            tvTrangThai.setText("Đã xác nhận");
+            tvTrangThai.setTextColor(Color.parseColor("#AF393D"));
+            icTrangThai.setImageResource(R.drawable.ic_trang_thai_dang_giao);
+        }
+        else if (trangThai.equals(Bill.DA_HOAN_THANH)){
+            list=billManager.getBillHoanThanh();
+            tvTrangThai.setText("Giao thành công");
+            tvTrangThai.setTextColor(Color.parseColor("#219653"));
+            icTrangThai.setImageResource(R.drawable.ic_trang_thai_da_giao);
+        }
+        else if (trangThai.equals(Bill.DA_HUY)){
+            list=billManager.getBillHuy();
+            tvTrangThai.setText("Đã Hủy");
+            tvTrangThai.setTextColor(Color.parseColor("#AF393D"));
+            icTrangThai.setImageResource(R.drawable.ic_trang_thai_da_huy);
+        }
+
+
+
+    }
+
+    @Override
+    public void setArguments(@Nullable Bundle args) {
+        super.setArguments(args);
+        trangThai=args.getString("trangthai");
+        list=args.getParcelableArrayList("list");
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        if (propertyChangeEvent.getPropertyName().equals("0")){
+            Bill bill=(Bill) propertyChangeEvent.getNewValue();
+            hoaDonAdapter.list.remove(bill);
+            hoaDonAdapter.notifyDataSetChanged();
+        }
+        else if (propertyChangeEvent.getPropertyName().equals("1")){
+            Toast.makeText(getContext(),"Đã Có sự thay đổi trên Server",Toast.LENGTH_LONG).show();
+            hoaDonAdapter.notifyDataSetChanged();
+        }else if(propertyChangeEvent.getPropertyName().equals("2")){
+            Toast.makeText(getContext(),"Có lỗi kết nối",Toast.LENGTH_LONG).show();
+            hoaDonAdapter.notifyDataSetChanged();
+        }
+    }
 }

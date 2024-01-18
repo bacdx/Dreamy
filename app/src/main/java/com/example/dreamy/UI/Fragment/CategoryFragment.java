@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import com.example.dreamy.R;
 import com.example.dreamy.UI.Adapter.CategoryAdapter;
-import com.example.dreamy.Interface.CategoryInterface;
-import com.example.dreamy.Interface.RetrofitService;
+import com.example.dreamy.InterfaceRetrofit.CategoryInterface;
+import com.example.dreamy.InterfaceRetrofit.RetrofitService;
 import com.example.dreamy.Model.Category;
 
 import java.util.ArrayList;

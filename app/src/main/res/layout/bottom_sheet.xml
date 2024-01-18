@@ -39,6 +39,19 @@
           app:layout_constraintTop_toTopOf="parent"></ImageView>
 
       <TextView
+          android:id="@+id/tv_count_btns"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="36dp"
+          android:text="Kho:  "
+          android:textSize="16dp"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="@+id/avatar"
+          app:layout_constraintStart_toEndOf="@+id/avatar"
+          app:layout_constraintTop_toTopOf="@+id/avatar"
+          app:layout_constraintVertical_bias="0.189"></TextView>
+
+      <TextView
           android:id="@+id/tv_sum_price"
           android:textStyle="bold"
           android:textSize="16dp"
@@ -126,12 +139,13 @@
                android:layout_height="40dp"
                android:text="-"></androidx.appcompat.widget.AppCompatButton>
 
-           <TextView
+           <EditText
                android:id="@+id/tv_count"
         android:gravity="center"
+               android:inputType="number"
                android:layout_width="40dp"
                android:layout_height="40dp"
-               android:text="1"></TextView>
+               android:text="1"></EditText>
            <androidx.appcompat.widget.AppCompatButton
                android:id="@+id/btn_cong"
                android:gravity="center"

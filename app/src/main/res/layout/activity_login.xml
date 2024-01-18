@@ -1,109 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@drawable/img_1"
+    android:background="@drawable/colorkit"
+    android:gravity="center_horizontal"
     tools:context=".UI.Activity.LoginActivity">
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="ĐĂNG NHẬP"
+        android:textColor="@color/pink"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tv_user_login"
+        android:text="bac@gmail.com"
+        style="@style/TextInputCustom"
+        android:textCursorDrawable="@color/pink"
+        android:drawablePadding="20dp"
+        android:textSize="16dp"
+        android:hint="Full name"
+        android:paddingStart="20dp"
+        android:drawableStart="@drawable/person_pink"
+        android:background="@drawable/background_inputtext"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="50dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tv_pasword_login"
+            android:text="123"
+            android:background="@drawable/background_inputtext"
+            android:layout_marginTop="60dp"
+            android:textCursorDrawable="@color/pink"
+            android:drawablePadding="20dp"
+            android:textSize="16dp"
+            android:hint="Password"
+            android:paddingStart="20dp"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/lock_pink"
+            android:layout_width="300dp"
+            android:layout_height="54dp"
+            ></com.google.android.material.textfield.TextInputEditText>
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
-
-        <LinearLayout
-            android:layout_width="413dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:drawableTint="@color/pink"
+            android:id="@+id/ck_remember_login"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="left"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/img_1"
-            android:orientation="vertical"
-            android:padding="24dp">
-
-            <TextView
-                android:id="@+id/loginText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:textAlignment="center"
-                android:textColor="@color/lavender"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/custom_edittext"
-                android:drawablePadding="8dp"
-                android:hint="Email"
-                android:padding="8dp"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_edittext"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/black" />
-
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/lavender"
-                android:text="Login"
-                android:textSize="18sp"
-                app:cornerRadius="20dp" />
-
-            <TextView
-                android:id="@+id/forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:padding="8dp"
-                android:text="Forgot Password?"
-                android:textColor="@color/lavender"
-                android:textSize="16sp" />
-
-            <com.developer.gbuttons.GoogleSignInButton
-                android:id="@+id/googleBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:padding="8dp"
-                android:text="Sign in with Google"
-                app:isDarkTheme="true" />
-
-            <TextView
-                android:id="@+id/signUpRedirectText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:text="Not yet registered? Sign Up"
-                android:textAlignment="center"
-                android:textColor="@color/lavender"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+            android:contentDescription="Nho mat khau"
+            android:text="Nhớ mật khẩu"></CheckBox>
+        <TextView
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Quên mật khẩu "></TextView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/check_err_login"
+        android:paddingStart="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red" ></TextView>
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btn_login_login"
+    android:layout_marginTop="100dp"
+    android:layout_width="250dp"
+    android:layout_height="57dp"
+    android:textColor="@color/white"
+    android:text="Đăng Nhập "
+    android:background="@drawable/buton_defau"></androidx.appcompat.widget.AppCompatButton>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Bạn chưa có tài khoản ?"></TextView>
+    <TextView
+        android:id="@+id/tv_signin_login"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng kí"></TextView>
 </LinearLayout>

@@ -1,38 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".UI.Activity.PayActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:layout_weight="1"
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pink"
+        android:background="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/icon_arrow_back"
         app:title="Thanh Toán"
         app:titleTextColor="@color/white"></androidx.appcompat.widget.Toolbar>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Chọn phương thức thanh toán: "></TextView>
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:text="Zalo Pay"
+                android:layout_height="wrap_content"></RadioButton>
+            <RadioButton
+                android:text="Thanh táon sau khi nhận đơn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></RadioButton>
+        </RadioGroup>
+        <TextView
+            android:id="@+id/tvSum_Pay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+           android:text="Tong tien"></TextView>
+
+
+
 
     <ScrollView
+        android:layout_weight="9"
         android:layout_width="match_parent"
-        android:layout_height="683dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_address_sum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Nhập vị trí của bạn"></com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                >-->
+
+<!--                <androidx.appcompat.widget.AppCompatAutoCompleteTextView-->
+<!--                    android:editable="false"-->
+<!--                    android:id="@+id/filled_exposed_dropdown"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcy_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                tools:listitem="@layout/item_pay" />
+        </LinearLayout>
 
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+
+        android:id="@+id/btn_pay_pay"
         android:layout_width="match_parent"
         android:layout_height="77dp"
+        android:layout_gravity="end"
         android:background="@color/pink"
         android:drawableStart="@drawable/baseline_payments_24"
         android:paddingStart="30dp"
@@ -41,6 +118,6 @@
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -3,60 +3,113 @@ package com.example.dreamy.Model;
 import java.util.List;
 
 public class Cart {
-    private String id ;
-    private String ten ;
-    private List<String> size;
-    private String gia ;
-    private String img ;
+    private int trangThai=0;
+    private int maChiTiet ;
+    private int maSanPham ;
+    private ProductDetal productDetal;
+    private Product product;
+    private int soLuong;
+    private int maSize;
+    private int maColor;
+    private float gia;
 
     public Cart() {
     }
 
-    public Cart(String id, String ten, List<String> size, String gia, String img) {
-        this.id = id;
-        this.ten = ten;
-        this.size = size;
-        this.gia = gia;
-        this.img = img;
+    public Cart(int maChiTiet, int maSanPham, ProductDetal productDetal, Product product, int soLuong, int maSize, int maColor) {
+        this.maChiTiet = maChiTiet;
+        this.maSanPham = maSanPham;
+        this.productDetal = productDetal;
+        this.product = product;
+        this.soLuong = soLuong;
+        this.maSize = maSize;
+        this.maColor = maColor;
+
     }
 
-    public String getId() {
-        return id;
+    public int getMaChiTiet() {
+        return maChiTiet;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMaChiTiet(int maChiTiet) {
+        this.maChiTiet = maChiTiet;
     }
 
-    public String getTen() {
-        return ten;
+    public int getMaSanPham() {
+        return maSanPham;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setMaSanPham(int maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
-    public List<String> getSize() {
-        return size;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setSize(List<String> size) {
-        this.size = size;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
-    public String getGia() {
+    public ProductDetal getProductDetal() {
+        return productDetal;
+    }
+
+    public void setProductDetal(ProductDetal productDetal) {
+        this.productDetal = productDetal;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public float getGia() {
         return gia;
     }
 
-    public void setGia(String gia) {
-        this.gia = gia;
+    public void setGia(float gia) {
+        this.gia = soLuong*(float)product.getGia();
     }
 
-    public String getImg() {
-        return img;
+    public int getMaSize() {
+        return maSize;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setMaSize(int maSize) {
+        this.maSize = maSize;
+    }
+
+    public int getMaColor() {
+        return maColor;
+    }
+
+    public void setMaColor(int maColor) {
+        this.maColor = maColor;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "maChiTiet=" + maChiTiet +
+                ", maSanPham=" + maSanPham +
+                ", productDetal=" + productDetal +
+                ", product=" + product +
+                ", soLuong=" + soLuong +
+                ", maSize=" + maSize +
+                ", maColor=" + maColor +
+                ", gia=" + gia +
+                '}';
     }
 }

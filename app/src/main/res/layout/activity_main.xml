@@ -10,45 +10,36 @@
 
     <LinearLayout
         android:background="#FFFFFF"
-        android:layout_weight="1"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="5dp">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:src="@drawable/logo" />
 
-       <LinearLayout
-           android:layout_gravity="center"
-           android:padding="5dp"
-           android:background="@drawable/home_gradiant"
-           android:orientation="horizontal"
-           android:layout_width="0dp"
-           android:layout_weight="4"
-           android:layout_height="50dp">
-           <EditText
-               android:background="@android:color/transparent"
+
+           <androidx.appcompat.widget.SearchView
+               android:background="@drawable/home_gradiant"
+               app:searchIcon="@drawable/baseline_search_24"
+               app:closeIcon="@drawable/baseline_close_24"
+               android:layout_weight="4"
                android:id="@+id/ed_search"
                android:layout_width="0dp"
+               android:baselineAligned="false"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
-               android:layout_weight="5"
                android:height="40dp"
+               android:searchSuggestAuthority="com.example.MyCustomSuggestionProvider"
                android:hint="Tìm kiếm sản phẩm"
                android:padding="8dp" />
-           <ImageView
-               android:id="@+id/img_search"
-               android:layout_width="0dp"
-               android:layout_height="40dp"
-               android:layout_weight="1"
-               android:src="@drawable/baseline_search_24" />
-       </LinearLayout>
+
+
         <ImageView
             android:id="@+id/img_cart"
             android:layout_width="0dp"
@@ -56,12 +47,15 @@
             android:layout_weight="1"
             android:src="@drawable/cart" />
     </LinearLayout>
-
+<ListView
+    android:id="@+id/lv_search_activityMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></ListView>
 
     <ScrollView
-        android:layout_weight="9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="9"
         android:fillViewport="true">
 
         <FrameLayout
